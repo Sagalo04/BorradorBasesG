@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.ConsultaController">
+  <children>
+    <Label layoutX="265.0" layoutY="26.0" prefHeight="25.0" prefWidth="83.0" text="CONSULTA">
+      <font>
+        <Font size="15.0" />
+      </font>
+    </Label>
+    <Label layoutX="93.0" layoutY="88.0" text="Fecha:">
+      <font>
+        <Font size="13.0" />
+      </font>
+    </Label>
+      <DatePicker fx:id="datepicker1" layoutX="150.0" layoutY="85.0" prefHeight="25.0" prefWidth="139.0" />
+      <DatePicker fx:id="datepicker2" layoutX="340.0" layoutY="85.0" prefHeight="25.0" prefWidth="150.0" />
+      <Button layoutX="281.0" layoutY="129.0" mnemonicParsing="false" onAction="#BtBuscarImg" text="Buscar" />
+      <TableView fx:id="ConsultasID" layoutX="50.0" layoutY="165.0" prefHeight="200.0" prefWidth="517.0" />
+  </children>
+</AnchorPane>

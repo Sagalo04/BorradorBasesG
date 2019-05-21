@@ -41,6 +41,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#OnBuscarAudio" text="Buscar Audio" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Consultar">
+               <items>
+                  <MenuItem fx:id="MenuImg" mnemonicParsing="false" onAction="#OnConsultar" text="Consultar imagenes" />
+               </items>
+            </Menu>
       </menus>
     </MenuBar>
       <Label layoutX="702.0" layoutY="100.0" prefHeight="28.0" prefWidth="289.0" text="Sube tu plantilla o usa las ya existentes">
