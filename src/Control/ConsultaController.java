@@ -58,6 +58,7 @@ public class ConsultaController {
     @FXML
     private void BtBuscarImg (ActionEvent event) {
        
+       ConsultasID.getColumns().clear();
             String fechinicio = datepicker1.getValue().toString();
             String fechfinal = datepicker2.getValue().toString();
             String sql1;
