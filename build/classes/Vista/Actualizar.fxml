@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.ActualizarController">
+  <children>
+    <Label layoutX="96.0" layoutY="67.0" text="Nombre *">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="18.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="93.0" layoutY="99.0" text="Segundo Nombre" />
+    <Label font="$x1" layoutX="92.0" layoutY="139.0" text="Apellido *" />
+    <Label font="$x1" layoutX="90.0" layoutY="180.0" text="Apellido 2" />
+    <Label font="$x1" layoutX="90.0" layoutY="222.0" text="Contraseña *" />
+    <TextField id="TextFieldName" fx:id="TextFieldNameCuenta" layoutX="318.0" layoutY="26.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldName" layoutX="318.0" layoutY="62.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldName2" layoutX="318.0" layoutY="98.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldAp" layoutX="318.0" layoutY="139.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldAp2" layoutX="318.0" layoutY="179.0" prefWidth="200.0" />
+    <PasswordField fx:id="TextFieldPass" layoutX="318.0" layoutY="221.0" prefWidth="200.0" />
+    <Label font="$x1" layoutX="96.0" layoutY="31.0" text="Nombre Cuenta*" />
+    <Button id="OnConfirm" blendMode="SRC_OVER" layoutX="155.0" layoutY="290.0" mnemonicParsing="false" onAction="#OnConfirm" text="Confirmar" textFill="BLACK" underline="false">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="15.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Button id="OnConfirm" blendMode="SRC_OVER" font="$x2" layoutX="332.0" layoutY="290.0" mnemonicParsing="false" onAction="#OnCancel" text="Cancelar" textFill="BLACK" underline="false" />
+  </children>
+</AnchorPane>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.LikeAudioController">
+   <children>
+      <Label layoutX="45.0" layoutY="37.0" text="Audio">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="83.0" text="id Audio" />
+      <TextField fx:id="FieldID" layoutX="106.0" layoutY="79.0" />
+      <Label layoutX="48.0" layoutY="124.0" text="ID">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="151.0" text="Usuario que publico">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="176.0" text="Fecha publicado">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="idAudioT" layoutX="204.0" layoutY="124.0" prefHeight="17.0" prefWidth="88.0" />
+      <Label fx:id="usuarioT" layoutX="206.0" layoutY="151.0" prefHeight="17.0" prefWidth="316.0" />
+      <Label fx:id="fechaT" layoutX="206.0" layoutY="176.0" prefHeight="17.0" prefWidth="316.0" />
+      <Button layoutX="51.0" layoutY="257.0" mnemonicParsing="false" onAction="#OnLikeAudio" text="Like" />
+      <Button layoutX="313.0" layoutY="79.0" mnemonicParsing="false" onAction="#OnBuscarAudio" text="Buscar" />
+   </children>
+</AnchorPane>

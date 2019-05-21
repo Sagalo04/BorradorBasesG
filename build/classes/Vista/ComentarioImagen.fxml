@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="ComentarioImagen" prefHeight="347.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.ComentarioImagenController">
+   <children>
+      <Label layoutX="25.0" layoutY="36.0" text="Comentar Imagen ">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="85.0" text="Id Imagen" />
+      <TextField fx:id="idImag" layoutX="92.0" layoutY="81.0" />
+      <Label layoutX="26.0" layoutY="119.0" text="Comentario" />
+      <TextArea fx:id="comenText" layoutX="24.0" layoutY="142.0" prefHeight="135.0" prefWidth="552.0" />
+      <Button layoutX="483.0" layoutY="293.0" mnemonicParsing="false" onAction="#OnEnviarComentario" text="Enviar" />
+   </children>
+</AnchorPane>

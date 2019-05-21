@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="504.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.SignInController">
+  <children>
+    <Label layoutX="107.0" layoutY="43.0" text="E-Mail *">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="18.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="107.0" layoutY="118.0" text="Nombre *" />
+    <Label font="$x1" layoutX="104.0" layoutY="150.0" text="Segundo Nombre" />
+    <Label font="$x1" layoutX="103.0" layoutY="190.0" text="Apellido *" />
+    <Label font="$x1" layoutX="101.0" layoutY="231.0" text="Apellido 2" />
+    <Label font="$x1" layoutX="101.0" layoutY="273.0" text="Contraseña *" />
+    <TextField fx:id="TextFieldEmail" layoutX="329.0" layoutY="42.0" prefWidth="200.0" />
+    <TextField id="TextFieldName" fx:id="TextFieldNameCuenta" layoutX="329.0" layoutY="77.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldName" layoutX="329.0" layoutY="113.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldName2" layoutX="329.0" layoutY="149.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldAp" layoutX="329.0" layoutY="190.0" prefWidth="200.0" />
+    <TextField fx:id="TextFieldAp2" layoutX="329.0" layoutY="230.0" prefWidth="200.0" />
+    <PasswordField fx:id="TextFieldPass" layoutX="329.0" layoutY="272.0" prefWidth="200.0" />
+    <Button id="OnConfirm" blendMode="SRC_OVER" layoutX="263.0" layoutY="333.0" mnemonicParsing="false" onAction="#OnConfirm" text="Confirmar" textFill="BLACK" underline="false">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="15.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Label font="$x1" layoutX="107.0" layoutY="82.0" text="Nombre Cuenta*" />
+    <Button font="$x2" layoutX="280.0" layoutY="389.0" mnemonicParsing="false" onAction="#OnAtras" text="Atras" />
+  </children>
+</AnchorPane>
