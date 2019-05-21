@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="PaneMain" prefHeight="763.0" prefWidth="1288.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.MainController">
+<AnchorPane id="AnchorPane" fx:id="PaneMain" prefHeight="763.0" prefWidth="1288.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Control.MainController">
   <children>
     <Label layoutX="381.0" layoutY="100.0" prefHeight="28.0" prefWidth="134.0" text="Crear Publicación">
       <font>
@@ -29,50 +29,36 @@
             <MenuItem mnemonicParsing="false" text="Delete" />
           </items>
         </Menu>
-            <Menu mnemonicParsing="false" text="Crear Comentario">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#OnComImagen" text="Comentar Imagen" />
-                  <MenuItem mnemonicParsing="false" onAction="#OnComAudio" text="Comentar Audio" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Buscar">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#OnBuscarImagen" text="Buscar Imagen" />
-                  <MenuItem mnemonicParsing="false" onAction="#OnBuscarAudio" text="Buscar Audio" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Consultar">
-               <items>
-                  <MenuItem fx:id="MenuImg" mnemonicParsing="false" onAction="#OnConsultar" text="Consultar imagenes" />
-               </items>
-            </Menu>
+        <Menu mnemonicParsing="false" text="Crear Comentario">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#OnComImagen" text="Comentar Imagen" />
+            <MenuItem mnemonicParsing="false" onAction="#OnComAudio" text="Comentar Audio" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Buscar">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#OnBuscarImagen" text="Buscar Imagen" />
+            <MenuItem mnemonicParsing="false" onAction="#OnBuscarAudio" text="Buscar Audio" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Consultar">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#OnConsultar" text="Consultar imagenes" fx:id="MenuImg" />
+          </items>
+        </Menu>
       </menus>
     </MenuBar>
-      <Label layoutX="702.0" layoutY="100.0" prefHeight="28.0" prefWidth="289.0" text="Sube tu plantilla o usa las ya existentes">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="15.0" fx:id="x11" />
-         </font>
-      </Label>
-      <Button font="$x1" layoutX="743.0" layoutY="172.0" mnemonicParsing="false" onAction="#OnBuscarPlantilla" text="Buscar" />
-      <Button font="$x1" layoutX="847.0" layoutY="172.0" mnemonicParsing="false" onAction="#OnSubirPlantilla" text="Subir" />
-      <Label fx:id="MainLabel" layoutX="457.0" layoutY="17.0">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="16.0" />
-         </font>
-      </Label>
-      <Button font="$x1" layoutX="597.0" layoutY="255.0" mnemonicParsing="false" onAction="#OnPublicacionesImagenes" text="Mirar" />
-      <Label layoutX="334.0" layoutY="260.0" text="Imagenes publicadas recientes">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="15.0" />
-         </font>
-      </Label>
-      <TableView fx:id="PublicacionesI" layoutX="9.0" layoutY="288.0" prefHeight="194.0" prefWidth="1263.0" />
-      <Label layoutX="334.0" layoutY="500.0" text="Audios publicados recientes">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="15.0" />
-         </font>
-      </Label>
-      <Button font="$x1" layoutX="597.0" layoutY="500.0" mnemonicParsing="false" onAction="#OnPublicacionesAudio" text="Mirar" />
-      <TableView fx:id="PublicacionesA" layoutX="8.0" layoutY="542.0" prefHeight="200.0" prefWidth="1263.0" />
+    <Label font="$x1" layoutX="702.0" layoutY="100.0" prefHeight="28.0" prefWidth="289.0" text="Sube tu plantilla o usa las ya existentes" />
+    <Button font="$x1" layoutX="743.0" layoutY="172.0" mnemonicParsing="false" onAction="#OnBuscarPlantilla" text="Buscar" />
+    <Button font="$x1" layoutX="847.0" layoutY="172.0" mnemonicParsing="false" onAction="#OnSubirPlantilla" text="Subir" />
+    <Label fx:id="MainLabel" layoutX="457.0" layoutY="17.0">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="16.0" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="527.0" layoutY="256.0" text="Imagenes publicadas recientes" />
+    <TableView fx:id="PublicacionesI" layoutX="9.0" layoutY="288.0" prefHeight="194.0" prefWidth="1263.0" />
+    <Label font="$x1" layoutX="543.0" layoutY="500.0" text="Audios publicados recientes" />
+    <TableView fx:id="PublicacionesA" layoutX="8.0" layoutY="542.0" prefHeight="200.0" prefWidth="1263.0" />
   </children>
 </AnchorPane>

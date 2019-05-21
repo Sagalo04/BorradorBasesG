@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import Control.ControlComentario;
 import Control.ControlLikeImagen;
 import Control.LoginController;
 import java.io.ByteArrayInputStream;
@@ -66,13 +67,6 @@ public class Imagen {
         this.button = button;
     }
 
-//    public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha) {
-//        this.id_imagen = id_imagen;
-//        this.Imagen = Imagen;
-//        this.correo = correo;
-//        this.fecha = fecha;
-//        this.button = new Button("Ver meme");
-//    }
     public Imagen() {
     }
 
@@ -87,7 +81,7 @@ public class Imagen {
             @Override
             public void handle(final ActionEvent e) {
 
-                openNewImageWindow(id_imagen);
+                openNewImageWindow(id_imagen, correo);
 
             }
         });
@@ -173,7 +167,7 @@ public class Imagen {
         return t;
     }
 
-    private void openNewImageWindow(int id) {
+    private void openNewImageWindow(int id, String correo) {
         Stage secondStage = new Stage();
 
         MenuBar menuBar = new MenuBar();
@@ -181,8 +175,36 @@ public class Imagen {
         MenuItem menuItem_Save = new MenuItem("Save Image");
         menuFile.getItems().addAll(menuItem_Save);
         menuBar.getMenus().addAll(menuFile);
+        TextField txt = new TextField();
 
+        //Label
         Button name = new Button("Like");
+
+        name.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent e) {
+
+                ControlLikeImagen objCL = new ControlLikeImagen();
+                LikeImagen objL = null;
+
+                Date date = new Date();
+                long x = date.getTime();
+                Timestamp fecha = new Timestamp(x);
+
+                boolean ins = false;
+
+                try {
+                    objL = new LikeImagen(id, correo, fecha);
+
+                    //Se llama al metodo de controlcuenta para insertar
+                    ins = objCL.DarLike(objL);
+
+                } catch (Exception ex) {
+                    System.out.println("ERROR " + ex.toString());
+                }
+            }
+        });
+
         Label name1 = new Label(id + "");
         ImageView imageView = new ImageView();
 
@@ -192,7 +214,7 @@ public class Imagen {
             public void handle(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save Image");
-                
+
                 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG", "*.png");
                 fileChooser.getExtensionFilters().add(extFilter);
                 //setExtFilters(fileChooser);
@@ -236,33 +258,68 @@ public class Imagen {
             }
         }
 
+        Button btn = new Button("Comentar");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent e) {
+
+                ControlComentario objCI = new ControlComentario();
+                Comentario objC = null;
+                boolean ins = false;
+                Date date = new Date();
+                long x = date.getTime();
+                Timestamp fecha = new Timestamp(x);
+
+                
+                try {
+                    objC = new Comentario(id+"", correo, txt.getText(), fecha);
+
+                    //Se llama al metodo de controlcuenta para insertar
+                    ins = objCI.ComentarImagen(objC);
+
+                    txt.setText("");
+                    
+                } catch (Exception ex) {
+                    System.out.println("ERROR " + ex.toString());
+                }
+            }
+        });
+
         final VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(10);
         vbox.setPadding(new Insets(0, 10, 0, 10));
-        vbox.getChildren().addAll(name, imageView);
-        
+        vbox.getChildren().addAll(name1, name, imageView, txt, btn);
+
+        txt.setPrefSize(200, 22);
+        txt.setMaxSize(200, 22);
+
+        btn.setTranslateX(146);
+        btn.setTranslateY(-35);
+
+        System.out.println(btn.getTranslateX() + "  " + btn.getTranslateY());
+
+        name1.setTranslateY(490);
+        name1.setTranslateX(-250);
+
         name.setTranslateX(-300);
         name.setTranslateY(450);
 
         URL linkLike = getClass().getResource("/Assets/like.png");
-        
-        Image imagenLike = new Image(linkLike.toString(),24,24,false,true);
-        
+
+        Image imagenLike = new Image(linkLike.toString(), 24, 24, false, true);
+
         name.setGraphic(new ImageView(imagenLike));
-        
+
         imageView.setFitHeight(400);
         imageView.setPreserveRatio(true);
         imageView.setImage(img);
         imageView.setSmooth(true);
         imageView.setCache(true);
 
-        
         //Scene scene = new Scene(new VBox(), 600, 615);
-        
         Scene scene = new Scene(new VBox(), 600, 615);
-       
-        
+
         ((VBox) scene.getRoot()).getChildren().addAll(menuBar, vbox);
 
         secondStage.setTitle("Title");
@@ -270,10 +327,10 @@ public class Imagen {
 
         secondStage.setHeight(600);
         secondStage.setWidth(750);
-        
+
         secondStage.setMaxHeight(600);
         secondStage.setMaxWidth(750);
-        
+
         secondStage.setMinHeight(600);
         secondStage.setMinWidth(750);
         secondStage.show();

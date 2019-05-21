@@ -13,7 +13,7 @@ import java.sql.Date;
  * @author User
  */
 public class ControlComentario {
-    boolean ComentarImagen(Comentario objC) {
+    public boolean ComentarImagen(Comentario objC) {
 
         long t = objC.getFecha().getTime();
 

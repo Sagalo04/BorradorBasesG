@@ -418,65 +418,6 @@ public class MainController implements Initializable {
         }
     }
 
-    @FXML
-    public void OnPublicacionesImagenes(ActionEvent event) {
-        ConnectBD cc = new ConnectBD();
-        String sql = "";
-        sql = ("select * from Imagen ORDER BY fecha ASC");
-        boolean f = false;
-        if (cc.crearConexion()) {
-            try {
-                Statement pst = cc.getConexion().createStatement();
-                ResultSet rs = pst.executeQuery(sql);
-                rs.first();
-                int cont = 0;
-                PublicacionesI.getItems().clear();
-                do {
-
-                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4));
-
-                    PublicacionesI.getItems().add(ip);
-
-                } while (rs.next());
-
-                f = true;
-
-            } catch (SQLException ex) {
-                System.out.println(ex);
-
-                f = false;
-            }
-        }
-    }
-
-    @FXML
-    public void OnPublicacionesAudio(ActionEvent event) {
-        ConnectBD cc = new ConnectBD();
-        String sql = "";
-        sql = ("select * from audio ORDER BY fecha ASC");
-        boolean f = false;
-        if (cc.crearConexion()) {
-            try {
-                Statement pst = cc.getConexion().createStatement();
-                ResultSet rs = pst.executeQuery(sql);
-                rs.first();
-                do {
-                    fechaPublicA.setText(rs.getString(1));
-                    //fechaPublicA.setCellValueFactory(rs.getString(1));  https://www.youtube.com/watch?v=_CfFR1OsezA
-                    ncuentaA.setText(rs.getString(2));
-                    idAudio.setText(rs.getString(3));
-
-                } while (rs.next());
-
-                f = true;
-
-            } catch (SQLException ex) {
-                System.out.println(ex);
-                f = false;
-            }
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // IMAGEN
