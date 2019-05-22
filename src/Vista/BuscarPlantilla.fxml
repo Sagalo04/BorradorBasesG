@@ -26,6 +26,5 @@
       </Label>
       <TextField fx:id="BuscarText" layoutX="195.0" layoutY="216.0" />
       <ImageView fx:id="ImageView" fitHeight="409.0" fitWidth="557.0" layoutX="29.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="621.0" layoutY="636.0" mnemonicParsing="false" onAction="#OnDescargar" text="Descargar" />
    </children>
 </AnchorPane>
