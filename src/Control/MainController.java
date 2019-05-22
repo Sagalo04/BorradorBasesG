@@ -193,7 +193,20 @@ public class MainController implements Initializable {
 
     @FXML
     public void OnBuscarPlantilla(ActionEvent event) {
+              try {
+            //PaneMain.setDisable(true);
+            //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
+            //tstage.hide();
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/BuscarPlantilla.fxml"));
 
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+            System.out.println("Busqueda Plantilla");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @FXML

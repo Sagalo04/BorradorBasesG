@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="860.0" prefWidth="1026.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Control.BuscarPlantillaController">
+   <children>
+      <Label layoutX="22.0" layoutY="26.0" text="Plantillas">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="102.0" layoutY="22.0" mnemonicParsing="false" onAction="#OnMirarExistentes" text="Mirar plantillas existentes" />
+      <TableView fx:id="PublicacionesPlan" layoutX="35.0" layoutY="61.0" prefHeight="140.0" prefWidth="712.0" />
+      <Button layoutX="371.0" layoutY="216.0" mnemonicParsing="false" onAction="#OnBusquedaId" text="Buscar" />
+      <Label layoutX="22.0" layoutY="220.0" text="Buscar plantilla por Id">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="BuscarText" layoutX="195.0" layoutY="216.0" />
+      <ImageView fx:id="ImageView" fitHeight="560.0" fitWidth="860.0" layoutX="56.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="931.0" layoutY="799.0" mnemonicParsing="false" onAction="#OnDescargar" text="Descargar" />
+   </children>
+</AnchorPane>
