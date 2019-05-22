@@ -351,6 +351,7 @@ public class Audio {
         stage.setMinHeight(488);
 
         stage.show();
+        ////
     }
 
 }
