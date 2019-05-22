@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Users/santiago.garcna/Documents/GitHub/BorradorBasesG/src/Control/BorradorBases.java</file>
-            <file>file:/D:/Users/santiago.garcna/Documents/GitHub/BorradorBasesG/src/Control/ActualizarController.java</file>
-            <file>file:/D:/Users/santiago.garcna/Documents/GitHub/BorradorBasesG/src/Control/MainController.java</file>
-            <file>file:/D:/Users/santiago.garcna/Documents/GitHub/BorradorBasesG/src/Control/ControlCuenta.java</file>
-            <file>file:/D:/Users/santiago.garcna/Documents/GitHub/BorradorBasesG/src/Modelo/Audio.java</file>
-            <file>file:/D:/Users/santiago.garcna/Documents/GitHub/BorradorBasesG/src/Modelo/Cuenta.java</file>
+            <file>file:/D:/Users/User/Documents/GitHub/BorradorBasesG/src/Control/MainController.java</file>
+            <file>file:/D:/Users/User/Documents/GitHub/BorradorBasesG/src/Control/BuscarPlantillaController.java</file>
+            <file>file:/D:/Users/User/Documents/GitHub/BorradorBasesG/src/Modelo/Plantilla.java</file>
+            <file>file:/D:/Users/User/Documents/GitHub/BorradorBasesG/src/Control/LikeImagenController.java</file>
         </group>
     </open-files>
 </project-private>
