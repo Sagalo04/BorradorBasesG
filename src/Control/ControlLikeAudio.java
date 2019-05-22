@@ -13,30 +13,29 @@ import Modelo.LikeAudio;
  */
 public class ControlLikeAudio {
 
-    boolean DarLike(LikeAudio objL) {
+    public boolean DarLike(LikeAudio objL) {
         String idAudio, correo, fecha;
-       
 
         if ("".equals(objL.getId_Audio())) {
             idAudio = null;
         } else {
             idAudio = "'" + objL.getId_Audio() + "'";
         }
-        
+
         if ("".equals(objL.getCorreo())) {
             correo = null;
         } else {
             correo = "'" + objL.getCorreo() + "'";
         }
-        
+
         if ("".equals(objL.getFecha())) {
             fecha = null;
         } else {
             fecha = "'" + objL.getFecha() + "'";
-        }        
+        }
 
         //System.out.println(date);
-        String sql = "INSERT INTO likeaudio(id_Audio, correo, fecha) VALUES("+idAudio+" , "+correo+" , "+ fecha +");"; 
+        String sql = "INSERT INTO likeaudio(id_Audio, correo, fecha) VALUES(" + idAudio + " , " + correo + " , " + fecha + ");";
 
         boolean corr = false;
 
@@ -48,5 +47,5 @@ public class ControlLikeAudio {
 
         return corr;
     }
-    
+
 }

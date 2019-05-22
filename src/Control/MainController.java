@@ -449,7 +449,7 @@ public class MainController implements Initializable {
         idImg.setCellValueFactory(new PropertyValueFactory<>("id_imagen"));
         Img.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, idImg, Img);
+        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, Img);
 
         ConnectBD cc = new ConnectBD();
         String sql = "";
@@ -489,7 +489,7 @@ public class MainController implements Initializable {
         idAudio.setCellValueFactory(new PropertyValueFactory<>("id_Audio"));
         Aud.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, idAudio, Aud);
+        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud);
 
         sql = ("select * from audio ORDER BY fecha DESC");
         boolean y = false;

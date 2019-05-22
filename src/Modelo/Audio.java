@@ -5,16 +5,20 @@
  */
 package Modelo;
 
+import Control.ControlComentario;
+import Control.ControlLikeAudio;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Date;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,6 +30,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -73,7 +80,7 @@ public class Audio {
             @Override
             public void handle(final ActionEvent e) {
 
-                openNewAudioWindow(id_Audio);
+                openNewAudioWindow(id_Audio, correo);
 
             }
 
@@ -146,14 +153,13 @@ public class Audio {
         return t;
     }
 
-    private void openNewAudioWindow(int id_Audio) {
+    private void openNewAudioWindow(int id_Audio, String Correo) {
 
+        /* Buscar audio según la id */
         ConnectBD cc = new ConnectBD();
         boolean f = false;
         String ab = "";
-
         String sql = "SELECT * FROM audio a WHERE a.id_Audio = '" + id_Audio + "' ; ";
-
         if (cc.crearConexion()) {
             try {
                 Statement pst = cc.getConexion().createStatement();
@@ -191,7 +197,7 @@ public class Audio {
         }
 
         Stage stage = new Stage();
-        Media media = new Media("file:///"+ab);
+        Media media = new Media("file:///" + ab);
         media.setOnError(() -> System.out.println("Media: " + media.getError().getMessage()));
 
         MediaPlayer player = new MediaPlayer(media);
@@ -261,10 +267,51 @@ public class Audio {
         Button play = new Button("Reproducir");
         Button pause = new Button("Pausar");
         Button stop = new Button("Detener");
+        TextField txt = new TextField();
+        txt.setPrefSize(200, 22);
+        txt.setMaxSize(200, 22);
+        Button Coment = new Button("Comentar");
+
+        Coment.setOnAction((final ActionEvent e) -> {
+            ControlComentario objCA = new ControlComentario();
+            Comentario objC = null;
+            boolean ins = false;
+            Date dat = new Date();
+
+            try {
+                objC = new Comentario(id_Audio + "", correo, txt.getText(), dat);
+
+                //Se llama al metodo de controlcuenta para insertar
+                ins = objCA.ComentarAudio(objC);
+
+            } catch (Exception ex) {
+                System.out.println("ERROR " + ex.toString());
+            }
+
+        });
+
+        URL linkLike = getClass().getResource("/Assets/like.png");
+
+        Image imagenLike = new Image(linkLike.toString(), 24, 24, false, true);
+
+        stop.setGraphic(new ImageView(imagenLike));
 
         play.setOnAction(e -> player.play());
         pause.setOnAction(e -> player.pause());
-        stop.setOnAction(e -> player.stop());
+        stop.setOnAction((final ActionEvent e) -> {
+            ControlLikeAudio objCA = new ControlLikeAudio();
+            LikeAudio objL = null;
+            Date date = new Date();
+            long x = date.getTime();
+            Timestamp fecha1 = new Timestamp(x);
+            boolean ins = false;
+            try {
+                objL = new LikeAudio(id_Audio, correo, fecha1);
+                ins = objCA.DarLike(objL);
+            } catch (Exception ex) {
+                System.out.println("ERROR " + ex.toString());
+            }
+        });
 
 //        Label cur_rate = new Label("1x");
 //        cur_rate.textProperty().bind(player.rateProperty().asString("%.1fx"));
@@ -275,12 +322,12 @@ public class Audio {
 //        // los valores validos para setRate van de 0 a 8
 //        inc_rate.setOnAction(e -> player.setRate(player.getRate() + 1));
 //        dec_rate.setOnAction(e -> player.setRate(player.getRate() - 1));
-
         HBox.setHgrow(volumen, Priority.ALWAYS);
         HBox panel = new HBox(
                 play, pause, stop,
                 //dec_rate, cur_rate, inc_rate,
-                lbl_volumen, volumen, actual_volumen);
+                lbl_volumen, volumen, actual_volumen,
+                txt, Coment);
 
         panel.setSpacing(10.0);
         panel.setAlignment(Pos.CENTER);
@@ -295,6 +342,14 @@ public class Audio {
         stage.setTitle("JavaFX Media API");
         stage.setScene(scene);
         stage.sizeToScene();
+
+        stage.setWidth(796);
+        stage.setHeight(488);
+        stage.setMaxWidth(796);
+        stage.setMaxHeight(488);
+        stage.setMinWidth(796);
+        stage.setMinHeight(488);
+
         stage.show();
     }
 
