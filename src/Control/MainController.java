@@ -538,4 +538,23 @@ public void OnConsultar(ActionEvent event) {
         }
 
     }
+
+public void OnConsultarComen(ActionEvent event) {
+
+        try {
+            //PaneMain.setDisable(true);
+            //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
+            //tstage.hide();
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaCom.fxml"));
+
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+            System.out.println(Usuario);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 }

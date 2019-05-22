@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Control.ConsultaComController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Consultar todos los comentarios realizados por usuario">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="49.0" text="Usuario" />
+      <TextField fx:id="UsuarioText" layoutX="67.0" layoutY="45.0" />
+      <Button layoutX="248.0" layoutY="45.0" mnemonicParsing="false" onAction="#OnBuscarComen" text="Buscar" />
+      <TableView fx:id="TableView" layoutX="14.0" layoutY="87.0" prefHeight="288.0" prefWidth="556.0" />
+   </children>
+</AnchorPane>

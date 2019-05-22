@@ -49,6 +49,13 @@ public class Comentario {
         this.Texto_Comentario = Texto_Comentario;
         this.fecha = fecha;        
     }
+    
+    public Comentario(Date fecha, String id_Imagen, String id_Audio, String Texto_Comentario){             
+        this.fecha = fecha;
+        this.id_Imagen = id_Imagen;
+        this.id_Audio = id_Audio;
+        this.Texto_Comentario = Texto_Comentario;        
+    }
      
 
     public int getId_Comentario() {
