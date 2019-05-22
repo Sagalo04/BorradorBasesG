@@ -7,6 +7,7 @@ package Modelo;
 
 import Control.ControlComentario;
 import Control.ControlLikeAudio;
+import Control.LoginController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -117,9 +118,7 @@ public class Audio {
     }
 
     public boolean insertarAudio(Audio objA, String sql) {
-        System.out.println(objA.getAudio());
-        System.out.println(objA.getCorreo());
-        System.out.println(objA.getFecha());
+
         boolean t = false;
         FileInputStream fis = null;
         PreparedStatement ps = null;
@@ -175,7 +174,6 @@ public class Audio {
                     InputStream in = blob.getBinaryStream();
                     OutputStream out = new FileOutputStream(someFile);
                     byte[] buff = blob.getBytes(1, (int) blob.length());
-                    System.out.println(someFile.toString());
                     out.write(buff);
                     out.close();
 
@@ -266,7 +264,7 @@ public class Audio {
 
         Button play = new Button("Reproducir");
         Button pause = new Button("Pausar");
-        Button stop = new Button("Detener");
+        Button stop = new Button("Like");
         TextField txt = new TextField();
         txt.setPrefSize(200, 22);
         txt.setMaxSize(200, 22);
@@ -279,8 +277,9 @@ public class Audio {
             Date dat = new Date();
 
             try {
-                objC = new Comentario(id_Audio + "", correo, txt.getText(), dat);
+                objC = new Comentario(id_Audio + "", LoginController.getUsuario(), txt.getText(), dat);
 
+                txt.setText("");
                 //Se llama al metodo de controlcuenta para insertar
                 ins = objCA.ComentarAudio(objC);
 
@@ -306,7 +305,7 @@ public class Audio {
             Timestamp fecha1 = new Timestamp(x);
             boolean ins = false;
             try {
-                objL = new LikeAudio(id_Audio, correo, fecha1);
+                objL = new LikeAudio(id_Audio, LoginController.getUsuario(), fecha1);
                 ins = objCA.DarLike(objL);
             } catch (Exception ex) {
                 System.out.println("ERROR " + ex.toString());

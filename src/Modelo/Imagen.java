@@ -194,7 +194,7 @@ public class Imagen {
                 boolean ins = false;
 
                 try {
-                    objL = new LikeImagen(id, correo, fecha);
+                    objL = new LikeImagen(id, LoginController.getUsuario(), fecha);
 
                     //Se llama al metodo de controlcuenta para insertar
                     ins = objCL.DarLike(objL);
@@ -272,7 +272,7 @@ public class Imagen {
 
                 
                 try {
-                    objC = new Comentario(id+"", correo, txt.getText(), fecha);
+                    objC = new Comentario(id+"", LoginController.getUsuario(), txt.getText(), fecha);
 
                     //Se llama al metodo de controlcuenta para insertar
                     ins = objCI.ComentarImagen(objC);
@@ -296,8 +296,6 @@ public class Imagen {
 
         btn.setTranslateX(146);
         btn.setTranslateY(-35);
-
-        System.out.println(btn.getTranslateX() + "  " + btn.getTranslateY());
 
         name1.setTranslateY(490);
         name1.setTranslateX(-250);

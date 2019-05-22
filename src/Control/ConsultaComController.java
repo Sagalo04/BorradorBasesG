@@ -39,6 +39,9 @@ public class ConsultaComController implements Initializable {
     
     @FXML
     public void OnBuscarComen(ActionEvent event) {       
+        
+        TableView.getColumns().clear();
+        
         fechaPublic = new TableColumn<>("Fecha Publicacion");
         idImagen = new TableColumn<>("Id_Imagen");
         idAudio = new TableColumn<>("Id_Audio");

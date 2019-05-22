@@ -165,7 +165,7 @@ public class MainController implements Initializable {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println(Usuario);
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -184,7 +184,7 @@ public class MainController implements Initializable {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println("Comentario Audio");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -203,7 +203,7 @@ public class MainController implements Initializable {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println("Busqueda Plantilla");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -221,7 +221,7 @@ public class MainController implements Initializable {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println("Comentario Imagen");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -255,9 +255,6 @@ public class MainController implements Initializable {
 
         Timestamp fecha = new Timestamp(x);
 
-        System.out.println(fecha);
-
-        //System.out.println(file.toString());
         Plantilla objP = new Plantilla(Integer.numberOfLeadingZeros(0), file.toString(), Usuario, fecha);
 
         boolean ins = false;
@@ -293,9 +290,6 @@ public class MainController implements Initializable {
 
         Timestamp fecha = new Timestamp(x);
 
-        System.out.println(fecha);
-
-        //System.out.println(file.toString());
         Imagen obji = new Imagen(Integer.numberOfLeadingZeros(0), file.toString(), Usuario, fecha);
 
         boolean ins = false;
@@ -358,8 +352,6 @@ public class MainController implements Initializable {
 
         Timestamp fecha = new Timestamp(x);
 
-        System.out.println(fecha);
-
         Audio objA = new Audio(Integer.numberOfLeadingZeros(0), file.toString(), Usuario, fecha);
 
         boolean ins = false;
@@ -378,7 +370,6 @@ public class MainController implements Initializable {
                 PublicacionesA.getItems().clear();
                 do {
                     int aa = rs.getInt(1);
-                    System.out.println(rs.getInt(1));
                     Audio ad = new Audio(aa, "", rs.getString(3), rs.getTimestamp(4));
 
                     PublicacionesA.getItems().add(ad);
@@ -407,7 +398,7 @@ public class MainController implements Initializable {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println("Buscar - Like Imagen");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -425,7 +416,7 @@ public class MainController implements Initializable {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println("Buscar - Like Imagen");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -435,7 +426,6 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // IMAGEN
         Usuario = LoginController.getUsuario();
-        System.out.println(Usuario);
 
         MainLabel.setText("Bienvenido " + Usuario);
 
@@ -501,7 +491,6 @@ public class MainController implements Initializable {
                 PublicacionesA.getItems().clear();
                 do {
                     int a = rs.getInt(1);
-                    System.out.println(rs.getInt(1));
                     Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4));
 
                     PublicacionesA.getItems().add(ad);
@@ -532,7 +521,6 @@ public void OnConsultar(ActionEvent event) {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println(Usuario);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -551,7 +539,6 @@ public void OnConsultarComen(ActionEvent event) {
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
-            System.out.println(Usuario);
         } catch (Exception e) {
             System.out.println(e);
         }

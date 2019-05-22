@@ -63,9 +63,6 @@ public class LoginController implements Initializable {
                 if (rs.next()) {
                     contraseña = rs.getString("contraseña");
                 }
-                //JOptionPane.showMessageDialog(null, contraseña);
-                //  t_pre.setText(("$ "+rs));
-
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
@@ -118,6 +115,16 @@ public class LoginController implements Initializable {
         Stage stage = new Stage();
         Scene scene = new Scene(parent);
         stage.setTitle("Crea una Cuenta");
+
+        stage.setHeight(504);
+        stage.setWidth(626);
+
+        stage.setMaxHeight(504);
+        stage.setMaxWidth(626);
+
+        stage.setMinHeight(504);
+        stage.setMinWidth(626);
+
         stage.setScene(scene);
         stage.show();
 
