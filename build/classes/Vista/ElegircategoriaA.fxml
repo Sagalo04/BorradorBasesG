@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.ElegircategoriaAController">
+   <children>
+      <Button layoutX="282.0" layoutY="188.0" mnemonicParsing="false" onAction="#OnAceptar" text="Aceptar" />
+      <Label layoutX="205.0" layoutY="66.0" text="A que Categoria pertenece tu Meme">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="CB1" layoutX="235.0" layoutY="103.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

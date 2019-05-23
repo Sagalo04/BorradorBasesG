@@ -50,8 +50,6 @@ import javafx.stage.Stage;
  *
  * @author Usuario
  */
-
-
 //Looka this
 public class MainController implements Initializable {
 
@@ -193,7 +191,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void OnBuscarPlantilla(ActionEvent event) {
-              try {
+        try {
             //PaneMain.setDisable(true);
             //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
             //tstage.hide();
@@ -323,6 +321,15 @@ public class MainController implements Initializable {
                 f = false;
             }
         }
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegirCategoria.fxml"));
+
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+        }
 
     }
 
@@ -382,6 +389,19 @@ public class MainController implements Initializable {
                 System.out.println(ex);
                 y = false;
             }
+
+            try {
+                Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegircategoriaA.fxml"));
+
+                Scene scene = new Scene(parent);
+                //stage.setTitle("Login");
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                System.out.println(e.toString());
+                e.printStackTrace();
+            }
+
         }
 
     }
@@ -509,7 +529,8 @@ public class MainController implements Initializable {
             }
         }
     }
-public void OnConsultar(ActionEvent event) {
+
+    public void OnConsultar(ActionEvent event) {
 
         try {
             //PaneMain.setDisable(true);
@@ -527,7 +548,7 @@ public void OnConsultar(ActionEvent event) {
 
     }
 
-public void OnConsultarComen(ActionEvent event) {
+    public void OnConsultarComen(ActionEvent event) {
 
         try {
             //PaneMain.setDisable(true);
