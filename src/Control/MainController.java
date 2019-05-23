@@ -397,7 +397,7 @@ public class MainController implements Initializable {
                 //stage.setTitle("Login");
                 stage.setScene(scene);
                 stage.show();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println(e.toString());
                 e.printStackTrace();
             }
