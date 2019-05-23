@@ -171,7 +171,7 @@ public class ControlCuenta {
 
     boolean insertarPlantilla(Plantilla objP) {
         boolean t = false;
-        String sql = "insert into Plantilla(Imagen,correo,fecha)" + " values(?,?,?)";
+        String sql = "insert into Plantilla(plantilla,correo,fecha)" + " values(?,?,?)";
 
         t = objP.insertarPlantilla(objP, sql);
 

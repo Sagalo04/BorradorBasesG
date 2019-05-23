@@ -81,7 +81,7 @@ public class Imagen {
             @Override
             public void handle(final ActionEvent e) {
 
-                openNewImageWindow(id_imagen, correo);
+                openNewImageWindow(id_imagen);
 
             }
         });
@@ -167,7 +167,7 @@ public class Imagen {
         return t;
     }
 
-    private void openNewImageWindow(int id, String correo) {
+    private void openNewImageWindow(int id) {
         Stage secondStage = new Stage();
 
         MenuBar menuBar = new MenuBar();
@@ -176,8 +176,7 @@ public class Imagen {
         menuFile.getItems().addAll(menuItem_Save);
         menuBar.getMenus().addAll(menuFile);
         TextField txt = new TextField();
-
-        //Label
+        Label name1 = new Label(id + "");
         Button name = new Button("Like");
 
         name.setOnAction(new EventHandler<ActionEvent>() {
@@ -202,10 +201,32 @@ public class Imagen {
                 } catch (Exception ex) {
                     System.out.println("ERROR " + ex.toString());
                 }
+                ConnectBD cc = new ConnectBD();
+                boolean f = false;
+                String sql = "SELECT COUNT(id_LikeImagen) FROM likeimagen WHERE id_imagen =" + id + ";";
+                if (cc.crearConexion()) {
+                    try {
+                        Statement pst = cc.getConexion().createStatement();
+                        ResultSet rs = pst.executeQuery(sql);
+                        rs.first();
+                        do {
+                            if (rs.getInt(1) == 0) {
+                                name1.setText("");
+                            } else {
+                                name1.setText(rs.getInt(1) + "");
+                            }
+                        } while (rs.next());
+
+                        f = true;
+
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                        f = false;
+                    }
+                }
             }
         });
 
-        Label name1 = new Label(id + "");
         ImageView imageView = new ImageView();
 
         menuItem_Save.setOnAction(new EventHandler<ActionEvent>() {
@@ -258,6 +279,28 @@ public class Imagen {
             }
         }
 
+        sql = "SELECT COUNT(id_LikeImagen) FROM likeimagen WHERE id_imagen =" + id + ";";
+        if (cc.crearConexion()) {
+            try {
+                Statement pst = cc.getConexion().createStatement();
+                ResultSet rs = pst.executeQuery(sql);
+                rs.first();
+                do {
+                    if (rs.getInt(1) == 0) {
+                        name1.setText("");
+                    } else {
+                        name1.setText(rs.getInt(1) + "");
+                    }
+                } while (rs.next());
+
+                f = true;
+
+            } catch (SQLException ex) {
+                System.out.println(ex);
+                f = false;
+            }
+        }
+
         Button btn = new Button("Comentar");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -270,15 +313,14 @@ public class Imagen {
                 long x = date.getTime();
                 Timestamp fecha = new Timestamp(x);
 
-                
                 try {
-                    objC = new Comentario(id+"", LoginController.getUsuario(), txt.getText(), fecha);
+                    objC = new Comentario(id + "", LoginController.getUsuario(), txt.getText(), fecha);
 
                     //Se llama al metodo de controlcuenta para insertar
                     ins = objCI.ComentarImagen(objC);
 
                     txt.setText("");
-                    
+
                 } catch (Exception ex) {
                     System.out.println("ERROR " + ex.toString());
                 }

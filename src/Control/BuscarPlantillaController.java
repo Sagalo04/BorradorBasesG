@@ -48,6 +48,8 @@ public class BuscarPlantillaController implements Initializable {
     @FXML
     public void OnMirarExistentes(ActionEvent event) {
         
+        PublicacionesPlan.getColumns().clear();
+        
         idPlantilla = new TableColumn<>("Id Plantilla");        
         fechaPublic = new TableColumn<>("Fecha Publicacion");
         ncuenta = new TableColumn<>("Correo");

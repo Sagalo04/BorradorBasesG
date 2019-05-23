@@ -17,6 +17,7 @@ import java.net.URL;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -81,7 +82,7 @@ public class Audio {
             @Override
             public void handle(final ActionEvent e) {
 
-                openNewAudioWindow(id_Audio, correo);
+                openNewAudioWindow(id_Audio);
 
             }
 
@@ -152,7 +153,7 @@ public class Audio {
         return t;
     }
 
-    private void openNewAudioWindow(int id_Audio, String Correo) {
+    private void openNewAudioWindow(int id_Audio) {
 
         /* Buscar audio según la id */
         ConnectBD cc = new ConnectBD();
@@ -228,6 +229,29 @@ public class Audio {
         Slider slider_time = new Slider();
         Label actual_time = new Label("0.00");
         Label total_time = new Label("0.00");
+        Label laud = new Label();
+
+        sql = "SELECT COUNT(id_LikeAudio) FROM likeaudio WHERE id_audio =" + id_Audio + ";";
+        if (cc.crearConexion()) {
+            try {
+                Statement pst = cc.getConexion().createStatement();
+                ResultSet rs = pst.executeQuery(sql);
+                rs.first();
+                do {
+                    if (rs.getInt(1) == 0) {
+                        laud.setText("");
+                    } else {
+                        laud.setText(rs.getInt(1) + "");
+                    }
+                } while (rs.next());
+
+                f = true;
+
+            } catch (SQLException ex) {
+                System.out.println(ex);
+                f = false;
+            }
+        }
 
         player.setOnReady(() -> {
 
@@ -297,6 +321,7 @@ public class Audio {
 
         play.setOnAction(e -> player.play());
         pause.setOnAction(e -> player.pause());
+
         stop.setOnAction((final ActionEvent e) -> {
             ControlLikeAudio objCA = new ControlLikeAudio();
             LikeAudio objL = null;
@@ -310,6 +335,29 @@ public class Audio {
             } catch (Exception ex) {
                 System.out.println("ERROR " + ex.toString());
             }
+            boolean f2;
+            String sql2 = "SELECT COUNT(id_LikeAudio) FROM likeaudio WHERE id_audio =" + id_Audio + ";";
+            if (cc.crearConexion()) {
+                try {
+                    Statement pst = cc.getConexion().createStatement();
+                    ResultSet rs = pst.executeQuery(sql2);
+                    rs.first();
+                    do {
+                        if (rs.getInt(1) == 0) {
+                            laud.setText("");
+                        } else {
+                            laud.setText(rs.getInt(1) + "");
+                        }
+                    } while (rs.next());
+
+                    f2 = true;
+
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                    f2 = false;
+                }
+            }
+
         });
 
 //        Label cur_rate = new Label("1x");
@@ -323,7 +371,7 @@ public class Audio {
 //        dec_rate.setOnAction(e -> player.setRate(player.getRate() - 1));
         HBox.setHgrow(volumen, Priority.ALWAYS);
         HBox panel = new HBox(
-                play, pause, stop,
+                play, pause, stop, laud,
                 //dec_rate, cur_rate, inc_rate,
                 lbl_volumen, volumen, actual_volumen,
                 txt, Coment);
@@ -342,11 +390,11 @@ public class Audio {
         stage.setScene(scene);
         stage.sizeToScene();
 
-        stage.setWidth(796);
+        stage.setWidth(810);
         stage.setHeight(488);
-        stage.setMaxWidth(796);
+        stage.setMaxWidth(810);
         stage.setMaxHeight(488);
-        stage.setMinWidth(796);
+        stage.setMinWidth(810);
         stage.setMinHeight(488);
 
         stage.show();

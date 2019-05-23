@@ -5,7 +5,11 @@
  */
 package Control;
 
+import Modelo.ConnectBD;
 import Modelo.LikeAudio;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -34,8 +38,34 @@ public class ControlLikeAudio {
             fecha = "'" + objL.getFecha() + "'";
         }
 
+        int likes=0;
+        ConnectBD cc = new ConnectBD();
+        boolean f = false;
+        String sql1 = "SELECT COUNT(id_LikeAudio) FROM likeaudio WHERE correo =" + correo + ";";
+        if (cc.crearConexion()) {
+            try {
+                Statement pst = cc.getConexion().createStatement();
+                ResultSet rs = pst.executeQuery(sql1);
+                rs.first();
+                do {
+                    likes = rs.getInt(1);
+                } while (rs.next());
+                
+                f = true;
+                
+            } catch (SQLException ex) {
+                System.out.println(ex);
+                f = false;
+            }
+        }
+        String sql = "";
+        if (likes==0) {
+            sql = "INSERT INTO likeaudio(id_Audio, correo, fecha) VALUES(" + idAudio + " , " + correo + " , " + fecha + ");";
+        }
+        else{
+            sql = "DELETE FROM likeaudio WHERE (correo = "+correo+");";
+        }
         //System.out.println(date);
-        String sql = "INSERT INTO likeaudio(id_Audio, correo, fecha) VALUES(" + idAudio + " , " + correo + " , " + fecha + ");";
 
         boolean corr = false;
 
