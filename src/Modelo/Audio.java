@@ -8,6 +8,7 @@ package Modelo;
 import Control.ControlComentario;
 import Control.ControlLikeAudio;
 import Control.LoginController;
+import Control.MainController;
 import static Modelo.Imagen.id;
 import java.io.File;
 import java.io.FileInputStream;
@@ -59,7 +60,7 @@ public class Audio {
     private String Audio;
     private String correo;
     private Timestamp fecha;
-    private Button button;
+    private Button buttonA;
     private Button button1;
     private int id_categoria;
     private String nombrecat;
@@ -74,7 +75,7 @@ public class Audio {
         this.fecha = fecha;
         this.id_categoria = id_categoria;
         this.Delete = new Button("Borrar");
-        
+
         this.Delete.setOnAction((final ActionEvent e) -> {
             ConnectBD con = new ConnectBD();
             String sql2 = "DELETE  FROM audio WHERE id_audio =" + id_Audio;
@@ -83,6 +84,37 @@ public class Audio {
 
                     Statement sentencia = con.getConexion().createStatement();
                     sentencia.execute(sql2);
+
+                    ConnectBD cc = new ConnectBD();
+                    String sql = "";
+                    sql = ("select * from audio ORDER BY fecha DESC");
+                    boolean y = false;
+                    if (cc.crearConexion()) {
+                        try {
+                            Statement pst = cc.getConexion().createStatement();
+                            ResultSet rs = pst.executeQuery(sql);
+                            rs.first();
+                            MainController.tableview2.getItems().clear();
+                            do {
+                                String sql3 = "select nombre_CategoriaAudio from categoriaaudio where id_CategoriaAudio = " + rs.getInt(5) + ";";
+                                Statement pst2 = cc.getConexion().createStatement();
+                                ResultSet rs2 = pst2.executeQuery(sql3);
+                                rs2.first();
+
+                                int n = rs.getInt(1);
+                                Audio ad = new Audio(n, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
+
+                                MainController.tableview2.getItems().add(ad);
+
+                            } while (rs.next());
+
+                            y = true;
+
+                        } catch (SQLException ex) {
+                            System.out.println(ex);
+                            y = false;
+                        }
+                    }
                     //Se llama al metodo de controlcuenta para insertar
 
                 } catch (SQLException ex) {
@@ -110,10 +142,10 @@ public class Audio {
         this.id_categoria = id_categoria;
         this.nombrecat = nombrecat;
 
-        this.button = new Button("Ver meme");
+        this.buttonA = new Button("Ver meme");
         this.button1 = new Button("Ver");
 
-        this.button.setOnAction(new EventHandler<ActionEvent>() {
+        this.buttonA.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(final ActionEvent e) {
@@ -136,6 +168,12 @@ public class Audio {
                     Scene scene = new Scene(parent);
                     //stage.setTitle("Login");
                     Stage stage = new Stage();
+                    stage.setWidth(600);
+                    stage.setHeight(400);
+                    stage.setMaxWidth(600);
+                    stage.setMaxHeight(400);
+                    stage.setMinWidth(600);
+                    stage.setMinHeight(400);
                     stage.setScene(scene);
                     stage.show();
 
@@ -188,12 +226,12 @@ public class Audio {
         this.nombrecat = nombrecat;
     }
 
-    public Button getButton() {
-        return button;
+    public Button getButtonA() {
+        return buttonA;
     }
 
-    public void setButton(Button button) {
-        this.button = button;
+    public void setButtonA(Button button) {
+        this.buttonA = button;
     }
 
     public Button getButton1() {

@@ -14,14 +14,16 @@
         <Font size="15.0" />
       </font>
     </Label>
-    <Label layoutX="93.0" layoutY="88.0" text="Fecha:">
+    <Label layoutX="93.0" layoutY="72.0" text="Fecha:">
       <font>
         <Font size="13.0" />
       </font>
     </Label>
-      <DatePicker fx:id="datepicker1" layoutX="150.0" layoutY="85.0" prefHeight="25.0" prefWidth="139.0" />
-      <DatePicker fx:id="datepicker2" layoutX="340.0" layoutY="85.0" prefHeight="25.0" prefWidth="150.0" />
-      <Button layoutX="281.0" layoutY="129.0" mnemonicParsing="false" onAction="#BtBuscarImg" text="Buscar" />
-      <TableView fx:id="ConsultasID" layoutX="50.0" layoutY="165.0" prefHeight="200.0" prefWidth="517.0" />
+      <DatePicker fx:id="datepicker1" layoutX="150.0" layoutY="69.0" prefHeight="25.0" prefWidth="139.0" />
+      <DatePicker fx:id="datepicker2" layoutX="340.0" layoutY="69.0" prefHeight="25.0" prefWidth="150.0" />
+      <Button layoutX="174.0" layoutY="102.0" mnemonicParsing="false" onAction="#BtBuscarImg" text="BuscarImagen" />
+      <TableView fx:id="ConsultasID" layoutX="48.0" layoutY="139.0" prefHeight="200.0" prefWidth="517.0" />
+      <Button layoutX="370.0" layoutY="102.0" mnemonicParsing="false" onAction="#BtBuscarAudio" text="BuscarAudio" />
+      <Button layoutX="269.0" layoutY="354.0" mnemonicParsing="false" onAction="#OnCancel1" text="Cancelar" />
   </children>
 </AnchorPane>

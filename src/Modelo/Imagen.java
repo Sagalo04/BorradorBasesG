@@ -8,6 +8,7 @@ package Modelo;
 import Control.ControlComentario;
 import Control.ControlLikeImagen;
 import Control.LoginController;
+import Control.MainController;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -90,9 +91,43 @@ public class Imagen {
 
                     Statement sentencia = con.getConexion().createStatement();
                     sentencia.execute(sql1);
+                    
+                     ConnectBD cc = new ConnectBD();
+        String sql = "";
+        sql = ("select * from Imagen ORDER BY fecha DESC");
+        boolean f = false;
+        if (cc.crearConexion()) {
+            try {
+                Statement pst = cc.getConexion().createStatement();
+                ResultSet rs = pst.executeQuery(sql);
+                rs.first();
+                MainController.tableview.getItems().clear();
+                do {
+
+                    String sql3 = "select nombre_CategoriaImagen from categoriaimagen where id_CategoriaImagen = " + rs.getInt(5) + ";";
+                    Statement pst2 = cc.getConexion().createStatement();
+                    ResultSet rs2 = pst2.executeQuery(sql3);
+                    rs2.first();
+
+                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
+
+                    MainController.tableview.getItems().add(ip);
+
+                } while (rs.next());
+
+                f = true;
+
+            } catch (SQLException ex) {
+                System.out.println(ex);
+
+                f = false;
+            }
+        }
                     //Se llama al metodo de controlcuenta para insertar
 
                 } catch (SQLException ex) {
+                    
+                    ex.printStackTrace();
 
                 }
 
@@ -129,10 +164,17 @@ public class Imagen {
                     id = id_imagen;
 
                     Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaComTotal.fxml"));
+                    
 
                     Scene scene = new Scene(parent);
                     //stage.setTitle("Login");
                     Stage stage = new Stage();
+                    stage.setWidth(600);
+                    stage.setHeight(400);
+                    stage.setMaxWidth(600);
+                    stage.setMaxHeight(400);
+                    stage.setMinWidth(600);
+                    stage.setMinHeight(400);
                     stage.setScene(scene);
                     stage.show();
 

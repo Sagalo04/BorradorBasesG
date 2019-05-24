@@ -128,6 +128,13 @@ public class MainController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("/Vista/Actualizar.fxml"));
 
             Scene scene = new Scene(parent);
+
+            stage.setWidth(600);
+            stage.setHeight(400);
+            stage.setMaxWidth(600);
+            stage.setMaxHeight(400);
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
@@ -147,7 +154,14 @@ public class MainController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("/Vista/EliminarC.fxml"));
 
             Scene scene = new Scene(parent);
-            //stage.setTitle("Login");
+
+            stage.setWidth(643);
+            stage.setHeight(400);
+            stage.setMaxWidth(643);
+            stage.setMaxHeight(400);
+            stage.setMinWidth(643);
+            stage.setMinHeight(400);
+
             stage.setScene(scene);
             stage.show();
 
@@ -166,6 +180,14 @@ public class MainController implements Initializable {
 
             Scene scene = new Scene(parent);
             //stage.setTitle("Login");
+
+            stage.setWidth(677);
+            stage.setHeight(673);
+            stage.setMaxHeight(673);
+            stage.setMaxWidth(677);
+            stage.setMinHeight(673);
+            stage.setMinWidth(677);
+
             stage.setScene(scene);
             stage.show();
 
@@ -216,6 +238,12 @@ public class MainController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegirCategoria.fxml"));
 
             Scene scene = new Scene(parent);
+            stage.setWidth(600);
+            stage.setHeight(301);
+            stage.setMaxWidth(600);
+            stage.setMaxHeight(301);
+            stage.setMinWidth(600);
+            stage.setMinHeight(301);
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
@@ -265,6 +293,12 @@ public class MainController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegircategoriaA.fxml"));
 
             Scene scene = new Scene(parent);
+            stage.setWidth(600);
+            stage.setHeight(400);
+            stage.setMaxWidth(600);
+            stage.setMaxHeight(400);
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
             //stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
@@ -310,6 +344,12 @@ public class MainController implements Initializable {
 
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/Vista/Consulta.fxml"));
+            stage.setWidth(600);
+            stage.setHeight(400);
+            stage.setMaxWidth(600);
+            stage.setMaxHeight(400);
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
 
             Scene scene = new Scene(parent);
             //stage.setTitle("Login");
@@ -325,6 +365,12 @@ public class MainController implements Initializable {
 
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaCom.fxml"));
+            stage.setWidth(600);
+            stage.setHeight(400);
+            stage.setMaxWidth(600);
+            stage.setMaxHeight(400);
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
 
             Scene scene = new Scene(parent);
             //stage.setTitle("Login");
@@ -410,7 +456,7 @@ public class MainController implements Initializable {
         fechaPublicA.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         ncuentaA.setCellValueFactory(new PropertyValueFactory<>("correo"));
         nombreCatA.setCellValueFactory(new PropertyValueFactory<>("nombrecat"));
-        Aud.setCellValueFactory(new PropertyValueFactory<>("button"));
+        Aud.setCellValueFactory(new PropertyValueFactory<>("buttonA"));
         ComenA.setCellValueFactory(new PropertyValueFactory<>("button1"));
 
         PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud, nombreCatA, ComenA);
