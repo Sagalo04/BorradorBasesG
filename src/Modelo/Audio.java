@@ -63,8 +63,34 @@ public class Audio {
     private Button button1;
     private int id_categoria;
     private String nombrecat;
+    private Button Delete;
 
     public Audio() {
+    }
+
+    public Audio(int id_Audio, Timestamp fecha, int id_categoria, String nombrecat) {
+        this.id_Audio = id_Audio;
+        this.nombrecat = nombrecat;
+        this.fecha = fecha;
+        this.id_categoria = id_categoria;
+        this.Delete = new Button("Borrar");
+        
+        this.Delete.setOnAction((final ActionEvent e) -> {
+            ConnectBD con = new ConnectBD();
+            String sql2 = "DELETE  FROM audio WHERE id_audio =" + id_Audio;
+            if (con.crearConexion()) {
+                try {
+
+                    Statement sentencia = con.getConexion().createStatement();
+                    sentencia.execute(sql2);
+                    //Se llama al metodo de controlcuenta para insertar
+
+                } catch (SQLException ex) {
+
+                }
+
+            }
+        });
     }
 
     public Audio(int id_Audio, String Audio, String correo, Timestamp fecha, int id_categoria) {
@@ -72,19 +98,8 @@ public class Audio {
         this.Audio = Audio;
         this.correo = correo;
         this.fecha = fecha;
-        this.button = new Button("Ver meme");
         this.id_categoria = id_categoria;
 
-        this.button.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(final ActionEvent e) {
-
-                openNewAudioWindow(id_Audio);
-
-            }
-
-        });
     }
 
     public Audio(int id_Audio, String Audio, String correo, Timestamp fecha, int id_categoria, String nombrecat) {
@@ -189,6 +204,14 @@ public class Audio {
         this.button1 = button1;
     }
 
+    public Button getDelete() {
+        return Delete;
+    }
+
+    public void setDelete(Button Delete) {
+        this.Delete = Delete;
+    }
+
     @Override
     public String toString() {
         return "Audio{" + "id_Audio=" + id_Audio + ", Audio=" + Audio + ", correo=" + correo + '}';
@@ -270,9 +293,8 @@ public class Audio {
                 f = false;
             }
         }
-        
-        //---------------------------------------------------------------------//
 
+        //---------------------------------------------------------------------//
         Stage stage = new Stage();
         Media media = new Media("file:///" + ab);
         media.setOnError(() -> System.out.println("Media: " + media.getError().getMessage()));

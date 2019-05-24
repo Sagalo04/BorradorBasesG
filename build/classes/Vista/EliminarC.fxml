@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.EliminarCController">
+   <children>
+      <TableView fx:id="TbI" layoutX="24.0" layoutY="62.0" prefHeight="276.0" prefWidth="290.0" />
+      <TableView fx:id="TbA" layoutX="332.0" layoutY="62.0" prefHeight="276.0" prefWidth="290.0" />
+   </children>
+</AnchorPane>

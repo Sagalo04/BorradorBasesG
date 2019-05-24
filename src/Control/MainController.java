@@ -74,13 +74,12 @@ public class MainController implements Initializable {
 
     @FXML
     TableView PublicacionesA;
-    
+
     TableColumn<String, Audio> fechaPublicA;
     TableColumn<String, Audio> ncuentaA;
     TableColumn<String, Audio> Aud;
     TableColumn<String, Audio> nombreCatA;
     TableColumn<String, Audio> ComenA;
-    
 
     //Stage ya sea para cerrar sesion o para abrir archivo imagen/Audio
     Stage stage = new Stage();
@@ -139,6 +138,23 @@ public class MainController implements Initializable {
 
     }
 
+    @FXML
+    public void OnDelete(ActionEvent event) {
+        try {
+            //PaneMain.setDisable(true);
+            //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
+            //tstage.hide();
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/EliminarC.fxml"));
+
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     @FXML
     public void OnBuscarPlantilla(ActionEvent event) {
@@ -274,7 +290,7 @@ public class MainController implements Initializable {
                     rs2.first();
 
                     int a = rs.getInt(1);
-                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5),rs2.getString(1));
+                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
 
                     PublicacionesA.getItems().add(ad);
 
@@ -290,6 +306,43 @@ public class MainController implements Initializable {
 
     }
 
+    public void OnConsultar(ActionEvent event) {
+
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/Consulta.fxml"));
+
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void OnConsultarComen(ActionEvent event) {
+
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaCom.fxml"));
+
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public static void setTableI(TableView tableview) {
+        MainController.tableview = tableview;
+    }
+
+    public static void setTable2(TableView tableview) {
+        MainController.tableview2 = tableview;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -311,7 +364,7 @@ public class MainController implements Initializable {
         Img.setCellValueFactory(new PropertyValueFactory<>("button"));
         ComenI.setCellValueFactory(new PropertyValueFactory<>("button2"));
 
-        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, Img, nombrecat,ComenI);
+        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, Img, nombrecat, ComenI);
 
         ConnectBD cc = new ConnectBD();
         String sql = "";
@@ -360,7 +413,7 @@ public class MainController implements Initializable {
         Aud.setCellValueFactory(new PropertyValueFactory<>("button"));
         ComenA.setCellValueFactory(new PropertyValueFactory<>("button1"));
 
-        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud,nombreCatA,ComenA);
+        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud, nombreCatA, ComenA);
 
         sql = ("select * from audio ORDER BY fecha DESC");
         boolean y = false;
@@ -377,7 +430,7 @@ public class MainController implements Initializable {
                     rs2.first();
 
                     int a = rs.getInt(1);
-                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5),rs2.getString(1));
+                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
 
                     PublicacionesA.getItems().add(ad);
 
@@ -395,47 +448,4 @@ public class MainController implements Initializable {
         tableview2 = PublicacionesA;
     }
 
-    public void OnConsultar(ActionEvent event) {
-
-        try {
-            //PaneMain.setDisable(true);
-            //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
-            //tstage.hide();
-            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/Consulta.fxml"));
-
-            Scene scene = new Scene(parent);
-            //stage.setTitle("Login");
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-
-    public void OnConsultarComen(ActionEvent event) {
-
-        try {
-            //PaneMain.setDisable(true);
-            //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
-            //tstage.hide();
-            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaCom.fxml"));
-
-            Scene scene = new Scene(parent);
-            //stage.setTitle("Login");
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-
-    public static void setTableI(TableView tableview) {
-        MainController.tableview = tableview;
-    }
-
-    public static void setTable2(TableView tableview) {
-        MainController.tableview2 = tableview;
-    }
 }

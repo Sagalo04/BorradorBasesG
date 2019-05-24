@@ -62,22 +62,7 @@ public class Imagen {
     private Button button2;
     private int id_categoria;
     private String nombrecat;
-
-    public Button getButton() {
-        return button;
-    }
-
-    public void setButton(Button button) {
-        this.button = button;
-    }
-
-    public Button getButton2() {
-        return button2;
-    }
-
-    public void setButton2(Button button2) {
-        this.button2 = button2;
-    }
+    private Button Delete;
 
     public Imagen() {
     }
@@ -87,14 +72,29 @@ public class Imagen {
         this.imagen = Imagen;
         this.correo = correo;
         this.fecha = fecha;
-        this.button = new Button("Ver meme");
         this.id_categoria = id_categoria;
+    }
 
-        this.button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent e) {
+    public Imagen(int id_imagen, Timestamp fecha, int id_categoria, String nombrecat) {
+        this.id_imagen = id_imagen;
+        this.fecha = fecha;
+        this.id_categoria = id_categoria;
+        this.nombrecat = nombrecat;
+        this.Delete = new Button("Borrar");
 
-                openNewImageWindow(id_imagen);
+        this.Delete.setOnAction((final ActionEvent e) -> {
+            ConnectBD con = new ConnectBD();
+            String sql1 = "DELETE  FROM imagen WHERE id_imagen =" + id_imagen;
+            if (con.crearConexion()) {
+                try {
+
+                    Statement sentencia = con.getConexion().createStatement();
+                    sentencia.execute(sql1);
+                    //Se llama al metodo de controlcuenta para insertar
+
+                } catch (SQLException ex) {
+
+                }
 
             }
         });
@@ -107,7 +107,7 @@ public class Imagen {
         this.fecha = fecha;
         this.id_categoria = id_categoria;
         this.nombrecat = nombrecat;
-        
+
         this.button2 = new Button("Ver");
         this.button = new Button("Ver meme");
 
@@ -127,7 +127,7 @@ public class Imagen {
                 try {
 
                     id = id_imagen;
-                    
+
                     Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaComTotal.fxml"));
 
                     Scene scene = new Scene(parent);
@@ -197,6 +197,30 @@ public class Imagen {
 
     public void setNombrecat(String nombrecat) {
         this.nombrecat = nombrecat;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+
+    public Button getButton2() {
+        return button2;
+    }
+
+    public void setButton2(Button button2) {
+        this.button2 = button2;
+    }
+
+    public Button getDelete() {
+        return Delete;
+    }
+
+    public void setDelete(Button Delete) {
+        this.Delete = Delete;
     }
 
     @Override
