@@ -105,7 +105,7 @@ public class ElegirCategoriaController implements Initializable {
 
         ConnectBD cc = new ConnectBD();
         String sql = "";
-        sql = ("select * from Imagen ORDER BY fecha ASC");
+        sql = ("select * from Imagen ORDER BY fecha DESC");
         boolean f = false;
         if (cc.crearConexion()) {
             try {
