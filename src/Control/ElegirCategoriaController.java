@@ -72,11 +72,11 @@ public class ElegirCategoriaController implements Initializable {
 
         Timestamp fecha = new Timestamp(x);
 
-        int id_cat=0;
+        int id_cat = 0;
 
         ConnectBD cc1 = new ConnectBD();
         String sql2 = "";
-        sql2 = ("select id_CategoriaImagen from categoriaimagen where nombre_CategoriaImagen=" +"'" +CB1.getValue() +"'"+ ";");
+        sql2 = ("select id_CategoriaImagen from categoriaimagen where nombre_CategoriaImagen=" + "'" + CB1.getValue() + "'" + ";");
         System.out.println(CB1.getValue());
         if (cc1.crearConexion()) {
             try {
@@ -110,11 +110,16 @@ public class ElegirCategoriaController implements Initializable {
                 Statement pst = cc.getConexion().createStatement();
                 ResultSet rs = pst.executeQuery(sql);
                 rs.first();
-                int cont = 0;
                 MainController.tableview.getItems().clear();
                 do {
 
-                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
+                    String sql3 = "select nombre_CategoriaImagen from categoriaimagen where id_CategoriaImagen = " + rs.getInt(5) + ";";
+                    Statement pst2 = cc.getConexion().createStatement();
+                    ResultSet rs2 = pst2.executeQuery(sql3);
+                    rs2.first();
+
+                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
+
                     MainController.tableview.getItems().add(ip);
 
                 } while (rs.next());
@@ -127,6 +132,7 @@ public class ElegirCategoriaController implements Initializable {
                 f = false;
             }
         }
+
 
     }
 
@@ -147,7 +153,7 @@ public class ElegirCategoriaController implements Initializable {
 
                     String item = rs.getString(2);
                     CB1.getItems().add(item);
-                    if (cont==0) {
+                    if (cont == 0) {
                         CB1.setValue(item);
                     }
                     cont++;
@@ -162,8 +168,7 @@ public class ElegirCategoriaController implements Initializable {
                 f = false;
             }
         }
-        
-        
+
         stage = new Stage();
 
     }

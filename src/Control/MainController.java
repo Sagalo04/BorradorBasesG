@@ -252,11 +252,17 @@ public class MainController implements Initializable {
                 Statement pst = cc.getConexion().createStatement();
                 ResultSet rs = pst.executeQuery(sql);
                 rs.first();
-                int cont = 0;
                 PublicacionesI.getItems().clear();
                 do {
 
-                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
+                    String sql2 = "select nombre_CategoriaImagen from categoriaimagen where id_CategoriaImagen = " + rs.getInt(5) + ";";
+                    Statement pst2 = cc.getConexion().createStatement();
+                    ResultSet rs2 = pst2.executeQuery(sql2);
+                    rs2.first();
+
+                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
+
+                    System.out.println(ip.getNombrecat());
 
                     PublicacionesI.getItems().add(ip);
 
@@ -299,8 +305,13 @@ public class MainController implements Initializable {
                 rs.first();
                 PublicacionesA.getItems().clear();
                 do {
-                    int aa = rs.getInt(1);
-                    Audio ad = new Audio(aa, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
+                    String sql2 = "select nombre_CategoriaAudio from categoriaaudio where id_CategoriaAudio = " + rs.getInt(5) + ";";
+                    Statement pst2 = cc.getConexion().createStatement();
+                    ResultSet rs2 = pst2.executeQuery(sql2);
+                    rs2.first();
+
+                    int a = rs.getInt(1);
+                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5),rs2.getString(1));
 
                     PublicacionesA.getItems().add(ad);
 
@@ -312,7 +323,6 @@ public class MainController implements Initializable {
                 System.out.println(ex);
                 y = false;
             }
-
         }
 
     }

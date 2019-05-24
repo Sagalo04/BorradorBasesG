@@ -107,12 +107,17 @@ public class ElegircategoriaAController implements Initializable {
                 Statement pst = cc.getConexion().createStatement();
                 ResultSet rs = pst.executeQuery(sql);
                 rs.first();
-                 MainController.tableview2.getItems().clear();
+                MainController.tableview2.getItems().clear();
                 do {
-                    int aa = rs.getInt(1);
-                    Audio ad = new Audio(aa, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
+                    String sql3 = "select nombre_CategoriaAudio from categoriaaudio where id_CategoriaAudio = " + rs.getInt(5) + ";";
+                    Statement pst2 = cc.getConexion().createStatement();
+                    ResultSet rs2 = pst2.executeQuery(sql3);
+                    rs2.first();
 
-                     MainController.tableview2.getItems().add(ad);
+                    int n = rs.getInt(1);
+                    Audio ad = new Audio(n, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
+
+                    MainController.tableview2.getItems().add(ad);
 
                 } while (rs.next());
 
@@ -122,8 +127,8 @@ public class ElegircategoriaAController implements Initializable {
                 System.out.println(ex);
                 y = false;
             }
-
         }
+
 
     }
 
@@ -131,7 +136,7 @@ public class ElegircategoriaAController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO.
         stage = new Stage();
-                ConnectBD cc = new ConnectBD();
+        ConnectBD cc = new ConnectBD();
         String sql = "";
         sql = ("select * from categoriaaudio");
         boolean f = false;
@@ -145,7 +150,7 @@ public class ElegircategoriaAController implements Initializable {
 
                     String item = rs.getString(2);
                     CB1.getItems().add(item);
-                    if (cont==0) {
+                    if (cont == 0) {
                         CB1.setValue(item);
                     }
                     cont++;
