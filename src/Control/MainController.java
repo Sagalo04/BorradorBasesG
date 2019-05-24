@@ -67,25 +67,20 @@ public class MainController implements Initializable {
     TableView PublicacionesI;
 
     TableColumn<String, Imagen> fechaPublic;
-
     TableColumn<String, Imagen> ncuenta;
-
     TableColumn<String, Imagen> nombrecat;
-
     TableColumn<String, Imagen> Img;
-    
     TableColumn<String, Imagen> ComenI;
 
     @FXML
     TableView PublicacionesA;
-
-    TableColumn fechaPublicA;
-
-    TableColumn ncuentaA;
-
-    TableColumn Aud;
-
-    TableColumn nombreCatA;
+    
+    TableColumn<String, Audio> fechaPublicA;
+    TableColumn<String, Audio> ncuentaA;
+    TableColumn<String, Audio> Aud;
+    TableColumn<String, Audio> nombreCatA;
+    TableColumn<String, Audio> ComenA;
+    
 
     //Stage ya sea para cerrar sesion o para abrir archivo imagen/Audio
     Stage stage = new Stage();
@@ -418,14 +413,16 @@ public class MainController implements Initializable {
         fechaPublicA = new TableColumn<>("Fecha Publicacion");
         ncuentaA = new TableColumn<>("Usuario");
         nombreCatA = new TableColumn<>("Categoria");
+        ComenA = new TableColumn<>("Comentario");
         Aud = new TableColumn<>("Audio");
 
         fechaPublicA.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         ncuentaA.setCellValueFactory(new PropertyValueFactory<>("correo"));
         nombreCatA.setCellValueFactory(new PropertyValueFactory<>("nombrecat"));
         Aud.setCellValueFactory(new PropertyValueFactory<>("button"));
+        ComenA.setCellValueFactory(new PropertyValueFactory<>("button1"));
 
-        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud,nombreCatA);
+        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud,nombreCatA,ComenA);
 
         sql = ("select * from audio ORDER BY fecha DESC");
         boolean y = false;

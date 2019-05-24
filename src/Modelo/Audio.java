@@ -8,6 +8,7 @@ package Modelo;
 import Control.ControlComentario;
 import Control.ControlLikeAudio;
 import Control.LoginController;
+import static Modelo.Imagen.id;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -54,11 +55,12 @@ import javafx.util.Pair;
 public class Audio {
 
     private int id_Audio;
+    public static int id;
     private String Audio;
     private String correo;
     private Timestamp fecha;
     private Button button;
-    private Button button2;
+    private Button button1;
     private int id_categoria;
     private String nombrecat;
 
@@ -70,12 +72,12 @@ public class Audio {
         this.button = button;
     }
 
-    public Button getButton2() {
-        return button2;
+    public Button getButton1() {
+        return button1;
     }
 
-    public void setButton2(Button button2) {
-        this.button2 = button2;
+    public void setButton1(Button button1) {
+        this.button1 = button1;
     }
 
     public Audio() {
@@ -108,7 +110,9 @@ public class Audio {
         this.correo = correo;
         this.id_categoria = id_categoria;
         this.nombrecat = nombrecat;
+        
         this.button = new Button("Ver meme");
+        this.button1 = new Button("Ver");
 
         this.button.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -116,6 +120,29 @@ public class Audio {
             public void handle(final ActionEvent e) {
 
                 openNewAudioWindow(id_Audio);
+
+            }
+
+        });
+
+        this.button1.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(final ActionEvent e) {
+
+                try {
+                    id = id_Audio;
+                    Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaComTotalA.fxml"));
+
+                    Scene scene = new Scene(parent);
+                    //stage.setTitle("Login");
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (Exception ex) {
+                    System.out.println(e);
+                }
 
             }
 
@@ -449,6 +476,12 @@ public class Audio {
 
         stage.show();
         ////
+    }
+
+    public static String sqlAud() {
+        String a = "CALL BuscarComentarioTotA (" + id + ") ; ";
+
+        return a;
     }
 
 }

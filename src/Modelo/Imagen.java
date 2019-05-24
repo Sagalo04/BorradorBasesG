@@ -125,9 +125,7 @@ public class Imagen {
             public void handle(final ActionEvent e) {
 
                 try {
-                    //PaneMain.setDisable(true);
-                    //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
-                    //tstage.hide();
+
                     id = id_imagen;
                     
                     Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaComTotal.fxml"));
@@ -137,9 +135,7 @@ public class Imagen {
                     Stage stage = new Stage();
                     stage.setScene(scene);
                     stage.show();
-                    
-                   
-                    
+
                 } catch (Exception ex) {
                     System.out.println(e);
                 }
