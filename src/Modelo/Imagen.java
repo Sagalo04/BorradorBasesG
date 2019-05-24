@@ -58,6 +58,8 @@ public class Imagen {
     private String correo;
     private Timestamp fecha;
     private Button button;
+    private int id_categoria;
+    private String nombrecat;
 
     public Button getButton() {
         return button;
@@ -70,12 +72,13 @@ public class Imagen {
     public Imagen() {
     }
 
-    public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha) {
+    public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha,int id_categoria) {
         this.id_imagen = id_imagen;
         this.Imagen = Imagen;
         this.correo = correo;
         this.fecha = fecha;
         this.button = new Button("Ver meme");
+        this.id_categoria = id_categoria;
 
         this.button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -86,6 +89,17 @@ public class Imagen {
             }
         });
     }
+
+    public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha, int id_categoria, String nombrecat) {
+        this.id_imagen = id_imagen;
+        this.Imagen = Imagen;
+        this.correo = correo;
+        this.fecha = fecha;
+        this.id_categoria = id_categoria;
+        this.nombrecat = nombrecat;
+    }
+    
+    
 
     public Imagen(int id_imagen, String correo, Timestamp fecha) {
         this.id_imagen = id_imagen;
@@ -125,6 +139,16 @@ public class Imagen {
         this.fecha = fecha;
     }
 
+    public int getId_categoria() {
+        return id_categoria;
+    }
+
+    public void setId_categoria(int id_categoria) {
+        this.id_categoria = id_categoria;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Imagen{" + "id_imagen=" + id_imagen + ", Imagen=" + Imagen + ", correo=" + correo + '}';
@@ -134,6 +158,7 @@ public class Imagen {
         System.out.println(objI.getImagen());
         System.out.println(objI.getCorreo());
         System.err.println(objI.getFecha());
+        System.out.println(objI.getId_categoria());
         boolean t = false;
         FileInputStream fis = null;
         PreparedStatement ps = null;
@@ -147,6 +172,7 @@ public class Imagen {
                 ps.setBinaryStream(1, fis, (int) file.length());
                 ps.setString(2, objI.getCorreo());
                 ps.setTimestamp(3, objI.getFecha());
+                ps.setInt(4, objI.getId_categoria());
                 ps.executeUpdate();
                 obj.getConexion().commit();
                 t = true;
@@ -155,6 +181,7 @@ public class Imagen {
         } catch (Exception ex) {
             t = false;
             System.out.println("Error " + ex.toString());
+            ex.printStackTrace();
         } finally {
             try {
                 ps.close();

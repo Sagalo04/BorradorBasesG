@@ -153,7 +153,7 @@ public class ControlCuenta {
 
     boolean insertarImagen(Imagen objI) {
         boolean t = false;
-        String sql = "insert into Imagen(Imagen,correo,fecha)" + " values(?,?,?)";
+        String sql = "insert into Imagen(Imagen,correo,fecha,id_CategoriaImagen)" + " values(?,?,?,?)";
 
         t = objI.insertarImagen(objI, sql);
 
@@ -162,7 +162,7 @@ public class ControlCuenta {
 
     boolean insertarAudio(Audio objA) {
         boolean t = false;
-        String sql = "insert into Audio(Audio,correo,fecha)" + " values(?,?,?)";
+        String sql = "insert into Audio(Audio,correo,fecha,id_CategoriaAudio)" + " values(?,?,?,?)";
 
         t = objA.insertarAudio(objA, sql);
 

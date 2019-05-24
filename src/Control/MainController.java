@@ -5,6 +5,7 @@
  */
 package Control;
 
+import static Control.LoginController.usuario;
 import Modelo.Audio;
 import Modelo.ConnectBD;
 import Modelo.Imagen;
@@ -118,6 +119,9 @@ public class MainController implements Initializable {
 //    TableColumn catA;
     //Stage ya sea para cerrar sesion o para abrir archivo imagen/Audio
     Stage stage = new Stage();
+
+    public static TableView tableview;
+    public static TableView tableview2;
 
     //Ususario recibido por medio del Login
     public String Usuario;
@@ -264,35 +268,15 @@ public class MainController implements Initializable {
     @FXML
     public void OnCreateImage(ActionEvent event) {
 
-        ControlCuenta objCC = new ControlCuenta();
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegirCategoria.fxml"));
 
-        //Lista de extensiones a usar
-        LinkedList<String> a = new LinkedList<>();
-        a.add("*.jpg");
-        a.add("*.jpeg");
-        a.add("*.png");
-        a.add("*.gif");
-
-        FileChooser fileChooser = new FileChooser();
-
-        //Se da la extencion de la imagen
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", a)
-        );
-
-        //Se muestra la escena para abrir la imagen
-        File file = fileChooser.showOpenDialog(stage);
-
-        Date date = new Date();
-        long x = date.getTime();
-
-        Timestamp fecha = new Timestamp(x);
-
-        Imagen obji = new Imagen(Integer.numberOfLeadingZeros(0), file.toString(), Usuario, fecha);
-
-        boolean ins = false;
-
-        ins = objCC.insertarImagen(obji);
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+        }
 
         ConnectBD cc = new ConnectBD();
         String sql = "";
@@ -307,7 +291,7 @@ public class MainController implements Initializable {
                 PublicacionesI.getItems().clear();
                 do {
 
-                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4));
+                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
 
                     PublicacionesI.getItems().add(ip);
 
@@ -321,49 +305,23 @@ public class MainController implements Initializable {
                 f = false;
             }
         }
-        try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegirCategoria.fxml"));
-
-            Scene scene = new Scene(parent);
-            //stage.setTitle("Login");
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-        }
 
     }
 
     //Metodo para Cargar Audio (Por ahora solo la carga no la almacena en sql)
     @FXML
     public void OnCreateAudio(ActionEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegircategoriaA.fxml"));
 
-        ControlCuenta objCC = new ControlCuenta();
-        //Lista de extensiones a usar
-        LinkedList<String> a = new LinkedList<>();
-        a.add("*.wav");
-        a.add("*.mp3");
-        a.add("*.ogg");
-
-        FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Audios", a)
-        );
-
-        //Show save file dialog
-        File file = fileChooser.showOpenDialog(stage);
-
-        Date date = new Date();
-        long x = date.getTime();
-
-        Timestamp fecha = new Timestamp(x);
-
-        Audio objA = new Audio(Integer.numberOfLeadingZeros(0), file.toString(), Usuario, fecha);
-
-        boolean ins = false;
-
-        ins = objCC.insertarAudio(objA);
+            Scene scene = new Scene(parent);
+            //stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
 
         ConnectBD cc = new ConnectBD();
         String sql = "";
@@ -377,7 +335,7 @@ public class MainController implements Initializable {
                 PublicacionesA.getItems().clear();
                 do {
                     int aa = rs.getInt(1);
-                    Audio ad = new Audio(aa, "", rs.getString(3), rs.getTimestamp(4));
+                    Audio ad = new Audio(aa, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
 
                     PublicacionesA.getItems().add(ad);
 
@@ -388,18 +346,6 @@ public class MainController implements Initializable {
             } catch (SQLException ex) {
                 System.out.println(ex);
                 y = false;
-            }
-
-            try {
-                Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ElegircategoriaA.fxml"));
-
-                Scene scene = new Scene(parent);
-                //stage.setTitle("Login");
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                System.out.println(e.toString());
-                e.printStackTrace();
             }
 
         }
@@ -444,6 +390,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // IMAGEN
         Usuario = LoginController.getUsuario();
 
@@ -473,7 +420,7 @@ public class MainController implements Initializable {
                 PublicacionesI.getItems().clear();
                 do {
 
-                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4));
+                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
 
                     PublicacionesI.getItems().add(ip);
 
@@ -511,7 +458,7 @@ public class MainController implements Initializable {
                 PublicacionesA.getItems().clear();
                 do {
                     int a = rs.getInt(1);
-                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4));
+                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
 
                     PublicacionesA.getItems().add(ad);
 
@@ -528,6 +475,9 @@ public class MainController implements Initializable {
                 y = false;
             }
         }
+
+        tableview = PublicacionesI;
+        tableview2 = PublicacionesA;
     }
 
     public void OnConsultar(ActionEvent event) {
@@ -564,5 +514,13 @@ public class MainController implements Initializable {
             System.out.println(e);
         }
 
+    }
+
+    public static void setTableI(TableView tableview) {
+        MainController.tableview = tableview;
+    }
+
+    public static void setTable2(TableView tableview) {
+        MainController.tableview2 = tableview;
     }
 }

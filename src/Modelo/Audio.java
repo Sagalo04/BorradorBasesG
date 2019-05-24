@@ -58,6 +58,8 @@ public class Audio {
     private String correo;
     private Timestamp fecha;
     private Button button;
+    private int id_categoria;
+    private String nombrecat;
 
     public Button getButton() {
         return button;
@@ -70,12 +72,13 @@ public class Audio {
     public Audio() {
     }
 
-    public Audio(int id_Audio, String Audio, String correo, Timestamp fecha) {
+    public Audio(int id_Audio, String Audio, String correo, Timestamp fecha,int id_categoria) {
         this.id_Audio = id_Audio;
         this.Audio = Audio;
         this.correo = correo;
         this.fecha = fecha;
         this.button = new Button("Ver meme");
+        this.id_categoria = id_categoria;
 
         this.button.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -88,6 +91,17 @@ public class Audio {
 
         });
     }
+
+    public Audio(int id_Audio, String Audio, String correo, Button button, int id_categoria, String nombrecat) {
+        this.id_Audio = id_Audio;
+        this.Audio = Audio;
+        this.correo = correo;
+        this.button = button;
+        this.id_categoria = id_categoria;
+        this.nombrecat = nombrecat;
+    }
+    
+    
 
     public String getAudio() {
         return Audio;
@@ -113,6 +127,16 @@ public class Audio {
         this.fecha = fecha;
     }
 
+    public int getId_categoria() {
+        return id_categoria;
+    }
+
+    public void setId_categoria(int id_categoria) {
+        this.id_categoria = id_categoria;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Audio{" + "id_Audio=" + id_Audio + ", Audio=" + Audio + ", correo=" + correo + '}';
@@ -133,6 +157,7 @@ public class Audio {
                 ps.setBinaryStream(1, fis, (int) file.length());
                 ps.setString(2, objA.getCorreo());
                 ps.setTimestamp(3, objA.getFecha());
+                ps.setInt(4, objA.getId_categoria());
                 ps.executeUpdate();
                 obj.getConexion().commit();
                 t = true;

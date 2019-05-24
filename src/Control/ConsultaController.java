@@ -101,7 +101,7 @@ public class ConsultaController {
                         
                    
 
-                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4));
+                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4),rs.getInt(5));
                     
                     ConsultasID.getItems().add(ip);
 
