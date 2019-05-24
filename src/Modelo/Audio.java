@@ -64,22 +64,6 @@ public class Audio {
     private int id_categoria;
     private String nombrecat;
 
-    public Button getButton() {
-        return button;
-    }
-
-    public void setButton(Button button) {
-        this.button = button;
-    }
-
-    public Button getButton1() {
-        return button1;
-    }
-
-    public void setButton1(Button button1) {
-        this.button1 = button1;
-    }
-
     public Audio() {
     }
 
@@ -110,7 +94,7 @@ public class Audio {
         this.correo = correo;
         this.id_categoria = id_categoria;
         this.nombrecat = nombrecat;
-        
+
         this.button = new Button("Ver meme");
         this.button1 = new Button("Ver");
 
@@ -189,13 +173,28 @@ public class Audio {
         this.nombrecat = nombrecat;
     }
 
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+
+    public Button getButton1() {
+        return button1;
+    }
+
+    public void setButton1(Button button1) {
+        this.button1 = button1;
+    }
+
     @Override
     public String toString() {
         return "Audio{" + "id_Audio=" + id_Audio + ", Audio=" + Audio + ", correo=" + correo + '}';
     }
 
     public boolean insertarAudio(Audio objA, String sql) {
-
         boolean t = false;
         FileInputStream fis = null;
         PreparedStatement ps = null;
@@ -271,6 +270,8 @@ public class Audio {
                 f = false;
             }
         }
+        
+        //---------------------------------------------------------------------//
 
         Stage stage = new Stage();
         Media media = new Media("file:///" + ab);
@@ -329,6 +330,7 @@ public class Audio {
                 f = false;
             }
         }
+        //---------------------------------------------------------------------//
 
         player.setOnReady(() -> {
 
@@ -349,7 +351,7 @@ public class Audio {
                 actual_time.setText(String.format("%.2f", value.toMinutes()));
             });
         });
-
+//---------------------------------------------------------------------//
         HBox.setHgrow(slider_time, Priority.ALWAYS);
         HBox time_bar = new HBox(actual_time, slider_time, total_time);
         time_bar.setSpacing(10.0);
@@ -437,15 +439,6 @@ public class Audio {
 
         });
 
-//        Label cur_rate = new Label("1x");
-//        cur_rate.textProperty().bind(player.rateProperty().asString("%.1fx"));
-//
-//        Button inc_rate = new Button(">>");
-//        Button dec_rate = new Button("<<");
-//
-//        // los valores validos para setRate van de 0 a 8
-//        inc_rate.setOnAction(e -> player.setRate(player.getRate() + 1));
-//        dec_rate.setOnAction(e -> player.setRate(player.getRate() - 1));
         HBox.setHgrow(volumen, Priority.ALWAYS);
         HBox panel = new HBox(
                 play, pause, stop, laud,
