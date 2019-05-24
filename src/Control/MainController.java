@@ -65,32 +65,12 @@ public class MainController implements Initializable {
 
     @FXML
     TableView PublicacionesI;
-//    @FXML
-//    TableColumn fechaPublic;
-//    @FXML
-//    TableColumn ncuenta;
-//    @FXML
-//    TableColumn idImg;
-//    @FXML
-//    TableColumn Img;
-//    @FXML
-//    TableColumn fechaCom;
-//    @FXML
-//    TableColumn Comen;
-//    @FXML
-//    TableColumn idLike;
-//    @FXML
-//    TableColumn fechaLike;
-//    @FXML
-//    TableColumn tagI;
-//    @FXML
-//    TableColumn catI;
 
     TableColumn<String, Imagen> fechaPublic;
 
     TableColumn<String, Imagen> ncuenta;
 
-    TableColumn<String, Imagen> idImg;
+    TableColumn<String, Imagen> nombrecat;
 
     TableColumn<String, Imagen> Img;
 
@@ -103,20 +83,8 @@ public class MainController implements Initializable {
 
     TableColumn Aud;
 
-    TableColumn idAudio;
+    TableColumn nombreCatA;
 
-//    @FXML
-//    TableColumn fechaComA;
-//    @FXML
-//    TableColumn ComenA;
-//    @FXML
-//    TableColumn idLikeA;
-//    @FXML
-//    TableColumn fechaLikeA;
-//    @FXML
-//    TableColumn tagA;
-//    @FXML
-//    TableColumn catA;
     //Stage ya sea para cerrar sesion o para abrir archivo imagen/Audio
     Stage stage = new Stage();
 
@@ -397,16 +365,16 @@ public class MainController implements Initializable {
         MainLabel.setText("Bienvenido " + Usuario);
 
         fechaPublic = new TableColumn<>("Fecha Publicacion");
-        ncuenta = new TableColumn<>("Correo");
-        idImg = new TableColumn<>("idImagen");
+        ncuenta = new TableColumn<>("Usuario");
+        nombrecat = new TableColumn<>("Categoria");
         Img = new TableColumn<>("img");
 
         fechaPublic.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         ncuenta.setCellValueFactory(new PropertyValueFactory<>("correo"));
-        idImg.setCellValueFactory(new PropertyValueFactory<>("id_imagen"));
+        nombrecat.setCellValueFactory(new PropertyValueFactory<>("nombrecat"));
         Img.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, Img);
+        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, Img, nombrecat);
 
         ConnectBD cc = new ConnectBD();
         String sql = "";
@@ -420,7 +388,14 @@ public class MainController implements Initializable {
                 PublicacionesI.getItems().clear();
                 do {
 
-                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
+                    String sql2 = "select nombre_CategoriaImagen from categoriaimagen where id_CategoriaImagen = " + rs.getInt(5) + ";";
+                    Statement pst2 = cc.getConexion().createStatement();
+                    ResultSet rs2 = pst2.executeQuery(sql2);
+                    rs2.first();
+
+                    Imagen ip = new Imagen(rs.getInt(1), "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5), rs2.getString(1));
+
+                    System.out.println(ip.getNombrecat());
 
                     PublicacionesI.getItems().add(ip);
 
@@ -437,16 +412,16 @@ public class MainController implements Initializable {
 
         //Audio
         fechaPublicA = new TableColumn<>("Fecha Publicacion");
-        ncuentaA = new TableColumn<>("Correo");
-        idAudio = new TableColumn<>("Id");
+        ncuentaA = new TableColumn<>("Usuario");
+        nombreCatA = new TableColumn<>("Categoria");
         Aud = new TableColumn<>("Audio");
 
         fechaPublicA.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         ncuentaA.setCellValueFactory(new PropertyValueFactory<>("correo"));
-        idAudio.setCellValueFactory(new PropertyValueFactory<>("id_Audio"));
+        nombreCatA.setCellValueFactory(new PropertyValueFactory<>("nombrecat"));
         Aud.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud);
+        PublicacionesA.getColumns().addAll(fechaPublicA, ncuentaA, Aud,nombreCatA);
 
         sql = ("select * from audio ORDER BY fecha DESC");
         boolean y = false;
@@ -457,15 +432,16 @@ public class MainController implements Initializable {
                 rs.first();
                 PublicacionesA.getItems().clear();
                 do {
+                    String sql2 = "select nombre_CategoriaAudio from categoriaaudio where id_CategoriaAudio = " + rs.getInt(5) + ";";
+                    Statement pst2 = cc.getConexion().createStatement();
+                    ResultSet rs2 = pst2.executeQuery(sql2);
+                    rs2.first();
+
                     int a = rs.getInt(1);
-                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5));
+                    Audio ad = new Audio(a, "", rs.getString(3), rs.getTimestamp(4), rs.getInt(5),rs2.getString(1));
 
                     PublicacionesA.getItems().add(ad);
 
-//                    fechaPublicA.setText(rs.getString(1));
-//                    //fechaPublicA.setCellValueFactory(rs.getString(1));  https://www.youtube.com/watch?v=_CfFR1OsezA
-//                    ncuentaA.setText(rs.getString(2));
-//                    idAudio.setText(rs.getString(3));
                 } while (rs.next());
 
                 y = true;

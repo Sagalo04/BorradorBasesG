@@ -58,6 +58,7 @@ public class Imagen {
     private String correo;
     private Timestamp fecha;
     private Button button;
+    private Button button2;
     private int id_categoria;
     private String nombrecat;
 
@@ -69,10 +70,20 @@ public class Imagen {
         this.button = button;
     }
 
+    public Button getButton2() {
+        return button2;
+    }
+
+    public void setButton2(Button button2) {
+        this.button2 = button2;
+    }
+    
+    
+
     public Imagen() {
     }
 
-    public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha,int id_categoria) {
+    public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha, int id_categoria) {
         this.id_imagen = id_imagen;
         this.Imagen = Imagen;
         this.correo = correo;
@@ -97,9 +108,18 @@ public class Imagen {
         this.fecha = fecha;
         this.id_categoria = id_categoria;
         this.nombrecat = nombrecat;
+        this.button = new Button("Ver meme");
+        
+        this.button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent e) {
+
+                openNewImageWindow(id_imagen);
+
+            }
+        });
+
     }
-    
-    
 
     public Imagen(int id_imagen, String correo, Timestamp fecha) {
         this.id_imagen = id_imagen;
@@ -145,6 +165,14 @@ public class Imagen {
 
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
+    }
+
+    public String getNombrecat() {
+        return nombrecat;
+    }
+
+    public void setNombrecat(String nombrecat) {
+        this.nombrecat = nombrecat;
     }
     
     

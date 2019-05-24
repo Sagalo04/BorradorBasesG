@@ -58,6 +58,7 @@ public class Audio {
     private String correo;
     private Timestamp fecha;
     private Button button;
+    private Button button2;
     private int id_categoria;
     private String nombrecat;
 
@@ -69,10 +70,18 @@ public class Audio {
         this.button = button;
     }
 
+    public Button getButton2() {
+        return button2;
+    }
+
+    public void setButton2(Button button2) {
+        this.button2 = button2;
+    }
+
     public Audio() {
     }
 
-    public Audio(int id_Audio, String Audio, String correo, Timestamp fecha,int id_categoria) {
+    public Audio(int id_Audio, String Audio, String correo, Timestamp fecha, int id_categoria) {
         this.id_Audio = id_Audio;
         this.Audio = Audio;
         this.correo = correo;
@@ -92,16 +101,26 @@ public class Audio {
         });
     }
 
-    public Audio(int id_Audio, String Audio, String correo, Button button, int id_categoria, String nombrecat) {
+    public Audio(int id_Audio, String Audio, String correo, Timestamp fecha, int id_categoria, String nombrecat) {
         this.id_Audio = id_Audio;
         this.Audio = Audio;
+        this.fecha = fecha;
         this.correo = correo;
-        this.button = button;
         this.id_categoria = id_categoria;
         this.nombrecat = nombrecat;
+        this.button = new Button("Ver meme");
+
+        this.button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(final ActionEvent e) {
+
+                openNewAudioWindow(id_Audio);
+
+            }
+
+        });
     }
-    
-    
 
     public String getAudio() {
         return Audio;
@@ -134,8 +153,14 @@ public class Audio {
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
     }
-    
-    
+
+    public String getNombrecat() {
+        return nombrecat;
+    }
+
+    public void setNombrecat(String nombrecat) {
+        this.nombrecat = nombrecat;
+    }
 
     @Override
     public String toString() {
