@@ -31,41 +31,31 @@ import javafx.scene.image.ImageView;
  * @author User
  */
 public class BuscarPlantillaController implements Initializable {
-    
+
     @FXML
     TableView PublicacionesPlan;
-    @FXML
-    TextField BuscarText;
-    @FXML
-    ImageView ImageView;
-    
     TableColumn<String, Plantilla> fechaPublic;
-    TableColumn<String, Plantilla> ncuenta;
     TableColumn<String, Plantilla> idPlantilla;
-    TableColumn<String, Plantilla> nombre;
-    TableColumn<String, Plantilla> apellido;
-    
-    @FXML
-    public void OnMirarExistentes(ActionEvent event) {
-        
+    TableColumn<String, Plantilla> butt;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+//         TODO    
         PublicacionesPlan.getColumns().clear();
-        
-        idPlantilla = new TableColumn<>("Id Plantilla");        
+
+        idPlantilla = new TableColumn<>("Id Plantilla");
         fechaPublic = new TableColumn<>("Fecha Publicacion");
-        ncuenta = new TableColumn<>("Correo");
-        nombre = new TableColumn<>("Nombre Usuario");
-        apellido = new TableColumn<>("Apellido Usuario");
-        
-        
+        butt = new TableColumn<>("Plantilla");
+
         idPlantilla.setCellValueFactory(new PropertyValueFactory<>("Id_Plantilla"));
         fechaPublic.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
-        ncuenta.setCellValueFactory(new PropertyValueFactory<>("NombreCuenta"));       
-        nombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
-        apellido.setCellValueFactory(new PropertyValueFactory<>("Apellido"));
+        butt.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-        
-        PublicacionesPlan.getColumns().addAll(idPlantilla, fechaPublic, ncuenta, nombre, apellido);
-        
+        PublicacionesPlan.getColumns().addAll(idPlantilla, fechaPublic, butt);
+
         ConnectBD cc = new ConnectBD();
         String sql = "";
         sql = ("select * from vw_plantillas ORDER BY Fecha ASC");
@@ -78,7 +68,7 @@ public class BuscarPlantillaController implements Initializable {
                 PublicacionesPlan.getItems().clear();
                 do {
 
-                    ViewPlantilla ip = new ViewPlantilla(rs.getInt(1), rs.getTimestamp(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                    ViewPlantilla ip = new ViewPlantilla(rs.getInt(1), rs.getTimestamp(2));
 
                     PublicacionesPlan.getItems().add(ip);
 
@@ -91,49 +81,7 @@ public class BuscarPlantillaController implements Initializable {
 
                 f = false;
             }
-        }       
-    }
-    
-    @FXML
-    public void OnBusquedaId(ActionEvent event) {
-        ConnectBD cc = new ConnectBD();
-        boolean f = false;
-        String idPlantilla = BuscarText.getText();  
-        
-        String sql = "SELECT p.plantilla FROM plantilla p WHERE p.id_Plantilla = '"+idPlantilla+"' ; ";
-
-        if (cc.crearConexion()) {
-            try {              
-                Statement pst = cc.getConexion().createStatement();
-                ResultSet rs = pst.executeQuery(sql);
-                rs.first();
-                do {                                       
-                    byte byteImage[] = null;
-                    Blob blob = rs.getBlob(1);
-                    byteImage = blob.getBytes(1, (int) blob.length());
-                    Image img = new Image(new ByteArrayInputStream(byteImage));                   
-                    ImageView.setImage(img);
-                } while (rs.next());               
-                f = true;            
-            } catch (SQLException ex) {
-                System.out.println(ex);
-                f = false;
-            }
         }
-  
-    }
-    
-     @FXML
-    public void OnDescargar(ActionEvent event) {
-        
     }
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO    
-    }    
-    
 }

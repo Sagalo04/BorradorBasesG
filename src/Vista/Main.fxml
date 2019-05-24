@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="PaneMain" prefHeight="763.0" prefWidth="1288.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Control.MainController">
+<AnchorPane id="AnchorPane" fx:id="PaneMain" prefHeight="763.0" prefWidth="1288.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.MainController">
   <children>
     <Label layoutX="381.0" layoutY="100.0" prefHeight="28.0" prefWidth="134.0" text="Crear Publicación">
       <font>
@@ -29,22 +29,10 @@
             <MenuItem mnemonicParsing="false" text="Delete" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Crear Comentario">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#OnComImagen" text="Comentar Imagen" />
-            <MenuItem mnemonicParsing="false" onAction="#OnComAudio" text="Comentar Audio" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Buscar">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#OnBuscarImagen" text="Buscar Imagen" />
-            <MenuItem mnemonicParsing="false" onAction="#OnBuscarAudio" text="Buscar Audio" />
-          </items>
-        </Menu>
         <Menu mnemonicParsing="false" text="Consultar">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#OnConsultar" text="Consultar imagenes" fx:id="MenuImg" />
-            <MenuItem mnemonicParsing="false" onAction="#OnConsultarComen" text="Consultar comentarios" fx:id="MenuCom" />
+            <MenuItem fx:id="MenuImg" mnemonicParsing="false" onAction="#OnConsultar" text="Consultar imagenes" />
+            <MenuItem fx:id="MenuCom" mnemonicParsing="false" onAction="#OnConsultarComen" text="Consultar comentarios" />
           </items>
         </Menu>
       </menus>
