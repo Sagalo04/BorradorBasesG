@@ -85,11 +85,9 @@ public class ElegirCategoriaController implements Initializable {
                 rs.first();
                 do {
                     id_cat = rs.getInt(1);
-                    System.out.println("LA IDCAT ES "+id_cat);
                 } while (rs.next());
 
             } catch (SQLException ex) {
-                System.out.println("LAREPUTA "+ex);
                 ex.printStackTrace();
             }
         }

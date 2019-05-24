@@ -54,7 +54,8 @@ import javax.swing.JOptionPane;
 public class Imagen {
 
     private int id_imagen;
-    private String Imagen;
+    public static int id;
+    private String imagen;
     private String correo;
     private Timestamp fecha;
     private Button button;
@@ -77,15 +78,13 @@ public class Imagen {
     public void setButton2(Button button2) {
         this.button2 = button2;
     }
-    
-    
 
     public Imagen() {
     }
 
     public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha, int id_categoria) {
         this.id_imagen = id_imagen;
-        this.Imagen = Imagen;
+        this.imagen = Imagen;
         this.correo = correo;
         this.fecha = fecha;
         this.button = new Button("Ver meme");
@@ -103,18 +102,47 @@ public class Imagen {
 
     public Imagen(int id_imagen, String Imagen, String correo, Timestamp fecha, int id_categoria, String nombrecat) {
         this.id_imagen = id_imagen;
-        this.Imagen = Imagen;
+        this.imagen = Imagen;
         this.correo = correo;
         this.fecha = fecha;
         this.id_categoria = id_categoria;
         this.nombrecat = nombrecat;
-        this.button = new Button("Ver meme");
         
+        this.button2 = new Button("Ver");
+        this.button = new Button("Ver meme");
+
         this.button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent e) {
 
                 openNewImageWindow(id_imagen);
+
+            }
+        });
+
+        this.button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent e) {
+
+                try {
+                    //PaneMain.setDisable(true);
+                    //Stage tstage = (Stage) myMenuBar.getScene().getWindow();
+                    //tstage.hide();
+                    id = id_imagen;
+                    
+                    Parent parent = FXMLLoader.load(getClass().getResource("/Vista/ConsultaComTotal.fxml"));
+
+                    Scene scene = new Scene(parent);
+                    //stage.setTitle("Login");
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                    
+                   
+                    
+                } catch (Exception ex) {
+                    System.out.println(e);
+                }
 
             }
         });
@@ -136,11 +164,11 @@ public class Imagen {
     }
 
     public String getImagen() {
-        return Imagen;
+        return imagen;
     }
 
     public void setImagen(String Imagen) {
-        this.Imagen = Imagen;
+        this.imagen = Imagen;
     }
 
     public String getCorreo() {
@@ -174,12 +202,10 @@ public class Imagen {
     public void setNombrecat(String nombrecat) {
         this.nombrecat = nombrecat;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Imagen{" + "id_imagen=" + id_imagen + ", Imagen=" + Imagen + ", correo=" + correo + '}';
+        return "Imagen{" + "id_imagen=" + id_imagen + ", Imagen=" + imagen + ", correo=" + correo + '}';
     }
 
     public boolean insertarImagen(Imagen objI, String sql) {
@@ -437,6 +463,14 @@ public class Imagen {
                 new FileChooser.ExtensionFilter("All Images", "*.*"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
+    }
+
+    public static String sqlImagen() {
+
+        String a = "CALL BuscarComentarioTot (" + id + ") ; ";
+
+        return a;
+
     }
 
 }

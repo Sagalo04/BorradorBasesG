@@ -73,6 +73,8 @@ public class MainController implements Initializable {
     TableColumn<String, Imagen> nombrecat;
 
     TableColumn<String, Imagen> Img;
+    
+    TableColumn<String, Imagen> ComenI;
 
     @FXML
     TableView PublicacionesA;
@@ -368,13 +370,15 @@ public class MainController implements Initializable {
         ncuenta = new TableColumn<>("Usuario");
         nombrecat = new TableColumn<>("Categoria");
         Img = new TableColumn<>("img");
+        ComenI = new TableColumn<>("Comentarios");
 
         fechaPublic.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         ncuenta.setCellValueFactory(new PropertyValueFactory<>("correo"));
         nombrecat.setCellValueFactory(new PropertyValueFactory<>("nombrecat"));
         Img.setCellValueFactory(new PropertyValueFactory<>("button"));
+        ComenI.setCellValueFactory(new PropertyValueFactory<>("button2"));
 
-        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, Img, nombrecat);
+        PublicacionesI.getColumns().addAll(fechaPublic, ncuenta, Img, nombrecat,ComenI);
 
         ConnectBD cc = new ConnectBD();
         String sql = "";
